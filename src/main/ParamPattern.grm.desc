@@ -1,0 +1,297 @@
+start symbol used on the rhs of 1 rule
+
+warning: start symbol appears on the rhs of <apats : apat apats >
+
+state 0:
+
+	apats : . apat 
+	apats : . apat apats 
+
+	ID	shift 5
+	LBRACE	shift 4
+	LPAREN	shift 3
+
+	id	goto 2
+	apat	goto 1
+	apats	goto 25
+
+	.	error
+
+
+state 1:
+
+	apats : apat .  (reduce by rule 13)
+	apats : apat . apats 
+
+	ID	shift 5
+	LBRACE	shift 4
+	LPAREN	shift 3
+
+	id	goto 2
+	apat	goto 1
+	apats	goto 6
+
+	.	reduce by rule 13
+
+
+state 2:
+
+	apat : id .  (reduce by rule 2)
+
+
+
+	.	reduce by rule 2
+
+
+state 3:
+
+	apat : LPAREN . apat RPAREN 
+	apat : LPAREN . RPAREN 
+	apat : LPAREN . apat COMMA pat_list RPAREN 
+
+	ID	shift 5
+	LBRACE	shift 4
+	LPAREN	shift 3
+	RPAREN	shift 8
+
+	id	goto 2
+	apat	goto 7
+
+	.	error
+
+
+state 4:
+
+	apat : LBRACE . RBRACE 
+	apat : LBRACE . plabels RBRACE 
+
+	ID	shift 12
+	RBRACE	shift 11
+
+	plabel	goto 10
+	plabels	goto 9
+
+	.	error
+
+
+state 5:
+
+	id : ID .  (reduce by rule 0)
+
+
+
+	.	reduce by rule 0
+
+
+state 6:
+
+	apats : apat apats .  (reduce by rule 14)
+
+
+
+	.	reduce by rule 14
+
+
+state 7:
+
+	apat : LPAREN apat . RPAREN 
+	apat : LPAREN apat . COMMA pat_list RPAREN 
+
+	COMMA	shift 14
+	RPAREN	shift 13
+
+
+	.	error
+
+
+state 8:
+
+	apat : LPAREN RPAREN .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 9:
+
+	apat : LBRACE plabels . RBRACE 
+
+	RBRACE	shift 15
+
+
+	.	error
+
+
+state 10:
+
+	plabels : plabel . COMMA plabels 
+	plabels : plabel .  (reduce by rule 10)
+
+	COMMA	shift 16
+
+
+	.	reduce by rule 10
+
+
+state 11:
+
+	apat : LBRACE RBRACE .  (reduce by rule 5)
+
+
+
+	.	reduce by rule 5
+
+
+state 12:
+
+	plabel : ID . EQUALOP apat 
+	plabel : ID .  (reduce by rule 8)
+
+	EQUALOP	shift 17
+
+
+	.	reduce by rule 8
+
+
+state 13:
+
+	apat : LPAREN apat RPAREN .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 14:
+
+	apat : LPAREN apat COMMA . pat_list RPAREN 
+
+	ID	shift 5
+	LBRACE	shift 4
+	LPAREN	shift 3
+
+	id	goto 2
+	apat	goto 19
+	pat_list	goto 18
+
+	.	error
+
+
+state 15:
+
+	apat : LBRACE plabels RBRACE .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 16:
+
+	plabels : plabel COMMA . plabels 
+
+	ID	shift 12
+
+	plabel	goto 10
+	plabels	goto 20
+
+	.	error
+
+
+state 17:
+
+	plabel : ID EQUALOP . apat 
+
+	ID	shift 5
+	LBRACE	shift 4
+	LPAREN	shift 3
+
+	id	goto 2
+	apat	goto 21
+
+	.	error
+
+
+state 18:
+
+	apat : LPAREN apat COMMA pat_list . RPAREN 
+
+	RPAREN	shift 22
+
+
+	.	error
+
+
+state 19:
+
+	pat_list : apat .  (reduce by rule 11)
+	pat_list : apat . COMMA pat_list 
+
+	COMMA	shift 23
+
+
+	.	reduce by rule 11
+
+
+state 20:
+
+	plabels : plabel COMMA plabels .  (reduce by rule 9)
+
+
+
+	.	reduce by rule 9
+
+
+state 21:
+
+	plabel : ID EQUALOP apat .  (reduce by rule 7)
+
+
+
+	.	reduce by rule 7
+
+
+state 22:
+
+	apat : LPAREN apat COMMA pat_list RPAREN .  (reduce by rule 4)
+
+
+
+	.	reduce by rule 4
+
+
+state 23:
+
+	pat_list : apat COMMA . pat_list 
+
+	ID	shift 5
+	LBRACE	shift 4
+	LPAREN	shift 3
+
+	id	goto 2
+	apat	goto 19
+	pat_list	goto 24
+
+	.	error
+
+
+state 24:
+
+	pat_list : apat COMMA pat_list .  (reduce by rule 12)
+
+
+
+	.	reduce by rule 12
+
+
+state 25:
+
+
+	EOF	accept
+
+
+	.	error
+
+21 of 56 action table entries left after compaction
+20 goto table entries

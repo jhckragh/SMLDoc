@@ -1,0 +1,25 @@
+(*
+ * @author YAMATODANI Kiyoshi
+ * @copyright 2010, Tohoku University.
+ *)
+Group is
+(*
+  to build this example, see ../../README.txt
+*)
+
+(*
+#if defined(NEW_CM)
+	$/basis_compat.cm
+#endif
+*)
+
+$/basis.cm
+
+        ../../smlformatlib.cm
+
+        Examples.ppg.sml
+	Types.ppg.sml
+(*
+        Examples.ppg:ppg
+	Types.ppg:ppg
+*)

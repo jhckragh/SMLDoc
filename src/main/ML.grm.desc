@@ -1,0 +1,9365 @@
+2 shift/reduce conflicts
+
+error:  state 145: shift/reduce conflict (shift BAR, reduce by rule 65)
+error:  state 527: shift/reduce conflict (shift AND, reduce by rule 263)
+
+state 0:
+
+	interdec : . sdecs' 
+	interdec : . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	ABSTYPE	shift 44
+	CASE	shift 43
+	DATATYPE	shift 42
+	EQUALOP	shift 41
+	EXCEPTION	shift 40
+	FN	shift 39
+	FUN	shift 38
+	FUNCTOR	shift 37
+	HASH	shift 36
+	IF	shift 35
+	INFIX	shift 34
+	INFIXR	shift 33
+	LET	shift 32
+	LOCAL	shift 31
+	NONFIX	shift 30
+	OP	shift 29
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	RAISE	shift 26
+	SIGNATURE	shift 25
+	STRUCTURE	shift 24
+	TYPE	shift 23
+	VAL	shift 22
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	FUNSIG	shift 16
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 8
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+	fixity	goto 4
+	ldec	goto 3
+	sdec	goto 2
+	sdecs'	goto 1
+	interdec	goto 622
+
+	.	error
+
+
+state 1:
+
+	interdec : sdecs' .  (reduce by rule 316)
+
+
+
+	.	reduce by rule 316
+
+
+state 2:
+
+	sdecs' : sdec . sdecs' 
+	sdecs' : sdec .  (reduce by rule 293)
+
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 37
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 31
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	SIGNATURE	shift 25
+	STRUCTURE	shift 24
+	TYPE	shift 23
+	VAL	shift 22
+	FUNSIG	shift 16
+
+	fixity	goto 4
+	ldec	goto 3
+	sdec	goto 2
+	sdecs'	goto 52
+
+	.	reduce by rule 293
+
+
+state 3:
+
+	sdec : ldec .  (reduce by rule 303)
+
+
+
+	.	reduce by rule 303
+
+
+state 4:
+
+	ldec : fixity . ops 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 54
+	ops	goto 53
+
+	.	error
+
+
+state 5:
+
+	aexp : quote .  (reduce by rule 110)
+
+
+
+	.	reduce by rule 110
+
+
+state 6:
+
+	app_exp : aexp .  (reduce by rule 88)
+	app_exp : aexp . app_exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	EQUALOP	shift 41
+	HASH	shift 36
+	LET	shift 32
+	OP	shift 29
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+
+	ident	goto 10
+	int	goto 9
+	app_exp	goto 56
+	aexp	goto 6
+	quote	goto 5
+
+	.	reduce by rule 88
+
+
+state 7:
+
+	exp : app_exp .  (reduce by rule 77)
+
+
+
+	.	reduce by rule 77
+
+
+state 8:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	interdec : exp .  (reduce by rule 317)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 317
+
+
+state 9:
+
+	aexp : int .  (reduce by rule 93)
+
+
+
+	.	reduce by rule 93
+
+
+state 10:
+
+	aexp : ident .  (reduce by rule 91)
+
+
+
+	.	reduce by rule 91
+
+
+state 11:
+
+	exp : FFIAPPLY . cconv aexp LPAREN ffiApplyArgs RPAREN COLON ffity 
+
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	cconv	goto 62
+	fficconv	goto 61
+
+	.	reduce by rule 86
+
+
+state 12:
+
+	exp : CAST . LPAREN exp RPAREN 
+
+	LPAREN	shift 65
+
+
+	.	error
+
+
+state 13:
+
+	aexp : AQID .  (reduce by rule 109)
+
+
+
+	.	reduce by rule 109
+
+
+state 14:
+
+	quote : BEGINQ . ENDQ 
+	quote : BEGINQ . ot_list ENDQ 
+
+	ENDQ	shift 68
+	OBJL	shift 67
+
+	ot_list	goto 66
+
+	.	error
+
+
+state 15:
+
+	aexp : VECTORSTART . exp_list RBRACKET 
+	aexp : VECTORSTART . RBRACKET 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	RBRACKET	shift 71
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 70
+	app_exp	goto 7
+	aexp	goto 6
+	exp_list	goto 69
+	quote	goto 5
+
+	.	error
+
+
+state 16:
+
+	sdec : FUNSIG . fsigb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 73
+	fsigb	goto 72
+
+	.	error
+
+
+state 17:
+
+	aexp : LPAREN . RPAREN 
+	aexp : LPAREN . exp_ps RPAREN 
+	aexp : LPAREN . exp_2c RPAREN 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	RPAREN	shift 77
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp_ps	goto 76
+	exp	goto 75
+	app_exp	goto 7
+	aexp	goto 6
+	exp_2c	goto 74
+	quote	goto 5
+
+	.	error
+
+
+state 18:
+
+	aexp : LBRACKET . exp_list RBRACKET 
+	aexp : LBRACKET . RBRACKET 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	RBRACKET	shift 79
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 70
+	app_exp	goto 7
+	aexp	goto 6
+	exp_list	goto 78
+	quote	goto 5
+
+	.	error
+
+
+state 19:
+
+	aexp : LBRACE . elabels RBRACE 
+	aexp : LBRACE . RBRACE 
+
+	ID	shift 87
+	INT	shift 86
+	ASTERISK	shift 85
+	RBRACE	shift 84
+
+	id	goto 83
+	selector	goto 82
+	elabel	goto 81
+	elabels	goto 80
+
+	.	error
+
+
+state 20:
+
+	ident : ASTERISK .  (reduce by rule 5)
+
+
+
+	.	reduce by rule 5
+
+
+state 21:
+
+	exp : WHILE . exp DO exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 88
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 22:
+
+	ldec : VAL . vb 
+	ldec : VAL . tyvarseq vb 
+	ldec : VAL . REC rvb 
+	ldec : VAL . REC tyvarseq rvb 
+
+	ID	shift 109
+	TYVAR	shift 108
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 104
+	OP	shift 103
+	REC	shift 102
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 98
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 94
+	apat	goto 93
+	apat'	goto 92
+	vb	goto 91
+	apats	goto 90
+	tyvarseq	goto 89
+
+	.	error
+
+
+state 23:
+
+	ldec : TYPE . tb 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tb	goto 111
+	tyvars	goto 110
+
+	.	reduce by rule 176
+
+
+state 24:
+
+	sdec : STRUCTURE . strb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 115
+	strb	goto 114
+
+	.	error
+
+
+state 25:
+
+	sdec : SIGNATURE . sigb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 117
+	sigb	goto 116
+
+	.	error
+
+
+state 26:
+
+	exp : RAISE . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 118
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 27:
+
+	ldec : OVERLOAD . ident COLON ty AS exp_pa 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 119
+
+	.	error
+
+
+state 28:
+
+	ldec : OPEN . qid_p 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 121
+	qid_p	goto 120
+
+	.	error
+
+
+state 29:
+
+	aexp : OP . ident 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 124
+
+	.	error
+
+
+state 30:
+
+	fixity : NONFIX .  (reduce by rule 200)
+
+
+
+	.	reduce by rule 200
+
+
+state 31:
+
+	sdec : LOCAL . sdecs IN sdecs END 
+
+	SEMICOLON	shift 127
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 37
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 31
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	SIGNATURE	shift 25
+	STRUCTURE	shift 24
+	TYPE	shift 23
+	VAL	shift 22
+	FUNSIG	shift 16
+
+	fixity	goto 4
+	ldec	goto 3
+	sdec	goto 126
+	sdecs	goto 125
+
+	.	reduce by rule 291
+
+
+state 32:
+
+	aexp : LET . ldecs IN exp_ps END 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 128
+
+	.	reduce by rule 218
+
+
+state 33:
+
+	fixity : INFIXR .  (reduce by rule 198)
+	fixity : INFIXR . int 
+
+	INT	shift 50
+	INT0	shift 49
+
+	int	goto 132
+
+	.	reduce by rule 198
+
+
+state 34:
+
+	fixity : INFIX .  (reduce by rule 196)
+	fixity : INFIX . int 
+
+	INT	shift 50
+	INT0	shift 49
+
+	int	goto 133
+
+	.	reduce by rule 196
+
+
+state 35:
+
+	exp : IF . exp THEN exp ELSE exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 134
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 36:
+
+	aexp : HASH . selector 
+
+	ID	shift 87
+	INT	shift 86
+	ASTERISK	shift 85
+
+	id	goto 83
+	selector	goto 135
+
+	.	error
+
+
+state 37:
+
+	sdec : FUNCTOR . fctb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 137
+	fctb	goto 136
+
+	.	error
+
+
+state 38:
+
+	ldec : FUN . fb 
+	ldec : FUN . tyvarseq fb 
+
+	ID	shift 109
+	TYVAR	shift 108
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 143
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 98
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	fb'	goto 142
+	fb	goto 141
+	apats	goto 140
+	clause	goto 139
+	tyvarseq	goto 138
+
+	.	error
+
+
+state 39:
+
+	exp : FN . match 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	match	goto 146
+	rule	goto 145
+	pat	goto 144
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 40:
+
+	ldec : EXCEPTION . eb 
+
+	OP	shift 150
+
+	op_op	goto 149
+	eb	goto 148
+
+	.	reduce by rule 8
+
+
+state 41:
+
+	ident : EQUALOP .  (reduce by rule 6)
+
+
+
+	.	reduce by rule 6
+
+
+state 42:
+
+	ldec : DATATYPE . db 
+	ldec : DATATYPE . db WITHTYPE tb 
+
+	TYVAR	shift 113
+	LAZY	shift 153
+	LPAREN	shift 112
+
+	tyvars	goto 152
+	db	goto 151
+
+	.	reduce by rule 176
+
+
+state 43:
+
+	exp : CASE . exp OF match 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 154
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 44:
+
+	ldec : ABSTYPE . db WITH ldecs END 
+	ldec : ABSTYPE . db WITHTYPE tb WITH ldecs END 
+
+	TYVAR	shift 113
+	LAZY	shift 153
+	LPAREN	shift 112
+
+	tyvars	goto 152
+	db	goto 155
+
+	.	reduce by rule 176
+
+
+state 45:
+
+	aexp : CHAR .  (reduce by rule 97)
+
+
+
+	.	reduce by rule 97
+
+
+state 46:
+
+	aexp : STRING .  (reduce by rule 96)
+
+
+
+	.	reduce by rule 96
+
+
+state 47:
+
+	aexp : REAL .  (reduce by rule 95)
+
+
+
+	.	reduce by rule 95
+
+
+state 48:
+
+	aexp : WORD .  (reduce by rule 94)
+
+
+
+	.	reduce by rule 94
+
+
+state 49:
+
+	int : INT0 .  (reduce by rule 1)
+
+
+
+	.	reduce by rule 1
+
+
+state 50:
+
+	int : INT .  (reduce by rule 0)
+
+
+
+	.	reduce by rule 0
+
+
+state 51:
+
+	ident : ID .  (reduce by rule 4)
+	aexp : ID . DOT qid 
+
+	DOT	shift 156
+
+
+	.	reduce by rule 4
+
+
+state 52:
+
+	sdecs' : sdec sdecs' .  (reduce by rule 292)
+
+
+
+	.	reduce by rule 292
+
+
+state 53:
+
+	ldec : fixity ops .  (reduce by rule 214)
+
+
+
+	.	reduce by rule 214
+
+
+state 54:
+
+	ops : ident .  (reduce by rule 222)
+	ops : ident . ops 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 54
+	ops	goto 157
+
+	.	reduce by rule 222
+
+
+state 55:
+
+	ident : ID .  (reduce by rule 4)
+
+
+
+	.	reduce by rule 4
+
+
+state 56:
+
+	app_exp : aexp app_exp .  (reduce by rule 89)
+
+
+
+	.	reduce by rule 89
+
+
+state 57:
+
+	exp : exp ANDALSO . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 158
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 58:
+
+	exp : exp ORELSE . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 159
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 59:
+
+	exp : exp COLON . ty 
+	exp : exp COLON . IMPORT ffity 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+	IMPORT	shift 164
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 160
+
+	.	error
+
+
+state 60:
+
+	exp : exp HANDLE . match 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	match	goto 169
+	rule	goto 145
+	pat	goto 144
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 61:
+
+	cconv : fficconv .  (reduce by rule 87)
+
+
+
+	.	reduce by rule 87
+
+
+state 62:
+
+	exp : FFIAPPLY cconv . aexp LPAREN ffiApplyArgs RPAREN COLON ffity 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	EQUALOP	shift 41
+	HASH	shift 36
+	LET	shift 32
+	OP	shift 29
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+
+	ident	goto 10
+	int	goto 9
+	aexp	goto 170
+	quote	goto 5
+
+	.	error
+
+
+state 63:
+
+	fficconv : STDCALL .  (reduce by rule 61)
+
+
+
+	.	reduce by rule 61
+
+
+state 64:
+
+	fficconv : CDECL .  (reduce by rule 60)
+
+
+
+	.	reduce by rule 60
+
+
+state 65:
+
+	exp : CAST LPAREN . exp RPAREN 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 171
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 66:
+
+	quote : BEGINQ ot_list . ENDQ 
+
+	ENDQ	shift 172
+
+
+	.	error
+
+
+state 67:
+
+	ot_list : OBJL . aexp 
+	ot_list : OBJL . aexp ot_list 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	EQUALOP	shift 41
+	HASH	shift 36
+	LET	shift 32
+	OP	shift 29
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+
+	ident	goto 10
+	int	goto 9
+	aexp	goto 173
+	quote	goto 5
+
+	.	error
+
+
+state 68:
+
+	quote : BEGINQ ENDQ .  (reduce by rule 111)
+
+
+
+	.	reduce by rule 111
+
+
+state 69:
+
+	aexp : VECTORSTART exp_list . RBRACKET 
+
+	RBRACKET	shift 174
+
+
+	.	error
+
+
+state 70:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	exp_list : exp .  (reduce by rule 117)
+	exp_list : exp . COMMA exp_list 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	COMMA	shift 175
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 117
+
+
+state 71:
+
+	aexp : VECTORSTART RBRACKET .  (reduce by rule 107)
+
+
+
+	.	reduce by rule 107
+
+
+state 72:
+
+	fsigb : fsigb . AND fsigb 
+	sdec : FUNSIG fsigb .  (reduce by rule 300)
+
+	AND	shift 176
+
+
+	.	reduce by rule 300
+
+
+state 73:
+
+	fsigb : ident . fparamList EQUALOP sign 
+
+	LPAREN	shift 178
+
+	fparamList	goto 177
+
+	.	error
+
+
+state 74:
+
+	aexp : LPAREN exp_2c . RPAREN 
+
+	RPAREN	shift 179
+
+
+	.	error
+
+
+state 75:
+
+	exp_ps : exp .  (reduce by rule 71)
+	exp_ps : exp . SEMICOLON exp_ps 
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	exp_2c : exp . COMMA exp_2c 
+	exp_2c : exp . COMMA exp 
+
+	SEMICOLON	shift 181
+	HANDLE	shift 60
+	COLON	shift 59
+	COMMA	shift 180
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 71
+
+
+state 76:
+
+	aexp : LPAREN exp_ps . RPAREN 
+
+	RPAREN	shift 182
+
+
+	.	error
+
+
+state 77:
+
+	aexp : LPAREN RPAREN .  (reduce by rule 101)
+
+
+
+	.	reduce by rule 101
+
+
+state 78:
+
+	aexp : LBRACKET exp_list . RBRACKET 
+
+	RBRACKET	shift 183
+
+
+	.	error
+
+
+state 79:
+
+	aexp : LBRACKET RBRACKET .  (reduce by rule 105)
+
+
+
+	.	reduce by rule 105
+
+
+state 80:
+
+	aexp : LBRACE elabels . RBRACE 
+
+	RBRACE	shift 184
+
+
+	.	error
+
+
+state 81:
+
+	elabels : elabel . COMMA elabels 
+	elabels : elabel .  (reduce by rule 70)
+
+	COMMA	shift 185
+
+
+	.	reduce by rule 70
+
+
+state 82:
+
+	elabel : selector . EQUALOP exp 
+
+	EQUALOP	shift 186
+
+
+	.	error
+
+
+state 83:
+
+	selector : id .  (reduce by rule 11)
+
+
+
+	.	reduce by rule 11
+
+
+state 84:
+
+	aexp : LBRACE RBRACE .  (reduce by rule 100)
+
+
+
+	.	reduce by rule 100
+
+
+state 85:
+
+	id : ASTERISK .  (reduce by rule 3)
+
+
+
+	.	reduce by rule 3
+
+
+state 86:
+
+	selector : INT .  (reduce by rule 12)
+
+
+
+	.	reduce by rule 12
+
+
+state 87:
+
+	id : ID .  (reduce by rule 2)
+
+
+
+	.	reduce by rule 2
+
+
+state 88:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : WHILE exp . DO exp 
+	exp : exp . COLON IMPORT ffity 
+
+	DO	shift 187
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	error
+
+
+state 89:
+
+	ldec : VAL tyvarseq . vb 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 104
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 94
+	apat	goto 93
+	apat'	goto 92
+	vb	goto 188
+	apats	goto 90
+
+	.	error
+
+
+state 90:
+
+	pat : apats .  (reduce by rule 121)
+
+
+
+	.	reduce by rule 121
+
+
+state 91:
+
+	vb : vb . AND vb 
+	ldec : VAL vb .  (reduce by rule 201)
+
+	AND	shift 189
+
+
+	.	reduce by rule 201
+
+
+state 92:
+
+	apat : apat' .  (reduce by rule 122)
+
+
+
+	.	reduce by rule 122
+
+
+state 93:
+
+	apats : apat .  (reduce by rule 169)
+	apats : apat . apats 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 190
+
+	.	reduce by rule 169
+
+
+state 94:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	vb : pat . EQUALOP exp 
+
+	AS	shift 193
+	EQUALOP	shift 192
+	COLON	shift 191
+
+
+	.	error
+
+
+state 95:
+
+	apat' : int .  (reduce by rule 130)
+
+
+
+	.	reduce by rule 130
+
+
+state 96:
+
+	apat : id .  (reduce by rule 124)
+
+
+
+	.	reduce by rule 124
+
+
+state 97:
+
+	apat' : VECTORSTART . RBRACKET 
+	apat' : VECTORSTART . pat_list RBRACKET 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	RBRACKET	shift 196
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 195
+	apat	goto 93
+	apat'	goto 92
+	pat_list	goto 194
+	apats	goto 90
+
+	.	error
+
+
+state 98:
+
+	apat : LPAREN . pat RPAREN 
+	apat : LPAREN . RPAREN 
+	apat : LPAREN . pat COMMA pat_list RPAREN 
+	apat : LPAREN . pat BAR or_pat_list RPAREN 
+	tyvarseq : LPAREN . tyvar_pc RPAREN 
+
+	ID	shift 109
+	TYVAR	shift 200
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	RPAREN	shift 199
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 198
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+	tyvar_pc	goto 197
+
+	.	error
+
+
+state 99:
+
+	apat' : LBRACKET . RBRACKET 
+	apat' : LBRACKET . pat_list RBRACKET 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	RBRACKET	shift 202
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 195
+	apat	goto 93
+	apat'	goto 92
+	pat_list	goto 201
+	apats	goto 90
+
+	.	error
+
+
+state 100:
+
+	apat' : LBRACE . RBRACE 
+	apat' : LBRACE . plabels RBRACE 
+
+	ID	shift 208
+	INT	shift 86
+	DOTDOTDOT	shift 207
+	ASTERISK	shift 85
+	RBRACE	shift 206
+
+	id	goto 83
+	selector	goto 205
+	plabel	goto 204
+	plabels	goto 203
+
+	.	error
+
+
+state 101:
+
+	apat' : WILD .  (reduce by rule 134)
+
+
+
+	.	reduce by rule 134
+
+
+state 102:
+
+	ldec : VAL REC . rvb 
+	ldec : VAL REC . tyvarseq rvb 
+
+	ID	shift 87
+	TYVAR	shift 108
+	LAZY	shift 214
+	OP	shift 213
+	ASTERISK	shift 85
+	LPAREN	shift 212
+
+	id	goto 211
+	rvb	goto 210
+	tyvarseq	goto 209
+
+	.	error
+
+
+state 103:
+
+	apat' : OP . ident 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 215
+
+	.	error
+
+
+state 104:
+
+	vb : LAZY . pat EQUALOP exp 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 216
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 105:
+
+	apat' : CHAR .  (reduce by rule 133)
+
+
+
+	.	reduce by rule 133
+
+
+state 106:
+
+	apat' : STRING .  (reduce by rule 132)
+
+
+
+	.	reduce by rule 132
+
+
+state 107:
+
+	apat' : WORD .  (reduce by rule 131)
+
+
+
+	.	reduce by rule 131
+
+
+state 108:
+
+	tyvarseq : TYVAR .  (reduce by rule 177)
+
+
+
+	.	reduce by rule 177
+
+
+state 109:
+
+	id : ID .  (reduce by rule 2)
+	apat' : ID . DOT qid 
+
+	DOT	shift 217
+
+
+	.	reduce by rule 2
+
+
+state 110:
+
+	tb : tyvars . ID EQUALOP ty 
+
+	ID	shift 218
+
+
+	.	error
+
+
+state 111:
+
+	tb : tb . AND tb 
+	ldec : TYPE tb .  (reduce by rule 207)
+
+	AND	shift 219
+
+
+	.	reduce by rule 207
+
+
+state 112:
+
+	tyvars : LPAREN . tyvar_pc RPAREN 
+
+	TYVAR	shift 200
+
+	tyvar_pc	goto 220
+
+	.	error
+
+
+state 113:
+
+	tyvars : TYVAR .  (reduce by rule 174)
+
+
+
+	.	reduce by rule 174
+
+
+state 114:
+
+	sdec : STRUCTURE strb .  (reduce by rule 298)
+	strb : strb . AND strb 
+
+	AND	shift 221
+
+
+	.	reduce by rule 298
+
+
+state 115:
+
+	strb : ident . sigconstraint_op EQUALOP str 
+
+	COLON	shift 224
+	COLONGT	shift 223
+
+	sigconstraint_op	goto 222
+
+	.	reduce by rule 264
+
+
+state 116:
+
+	sigb : sigb . AND sigb 
+	sdec : SIGNATURE sigb .  (reduce by rule 299)
+
+	AND	shift 225
+
+
+	.	reduce by rule 299
+
+
+state 117:
+
+	sigb : ident . EQUALOP sign 
+
+	EQUALOP	shift 226
+
+
+	.	error
+
+
+state 118:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : RAISE exp .  (reduce by rule 82)
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 82
+
+
+state 119:
+
+	ldec : OVERLOAD ident . COLON ty AS exp_pa 
+
+	COLON	shift 227
+
+
+	.	error
+
+
+state 120:
+
+	ldec : OPEN qid_p .  (reduce by rule 213)
+
+
+
+	.	reduce by rule 213
+
+
+state 121:
+
+	qid_p : qid .  (reduce by rule 194)
+	qid_p : qid . qid_p 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 121
+	qid_p	goto 228
+
+	.	reduce by rule 194
+
+
+state 122:
+
+	qid : ident .  (reduce by rule 10)
+
+
+
+	.	reduce by rule 10
+
+
+state 123:
+
+	ident : ID .  (reduce by rule 4)
+	qid : ID . DOT qid 
+
+	DOT	shift 229
+
+
+	.	reduce by rule 4
+
+
+state 124:
+
+	aexp : OP ident .  (reduce by rule 90)
+
+
+
+	.	reduce by rule 90
+
+
+state 125:
+
+	sdec : LOCAL sdecs . IN sdecs END 
+
+	IN	shift 230
+
+
+	.	error
+
+
+state 126:
+
+	sdecs : sdec . sdecs 
+
+	SEMICOLON	shift 127
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 37
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 31
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	SIGNATURE	shift 25
+	STRUCTURE	shift 24
+	TYPE	shift 23
+	VAL	shift 22
+	FUNSIG	shift 16
+
+	fixity	goto 4
+	ldec	goto 3
+	sdec	goto 126
+	sdecs	goto 231
+
+	.	reduce by rule 291
+
+
+state 127:
+
+	sdecs : SEMICOLON . sdecs 
+
+	SEMICOLON	shift 127
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 37
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 31
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	SIGNATURE	shift 25
+	STRUCTURE	shift 24
+	TYPE	shift 23
+	VAL	shift 22
+	FUNSIG	shift 16
+
+	fixity	goto 4
+	ldec	goto 3
+	sdec	goto 126
+	sdecs	goto 232
+
+	.	reduce by rule 291
+
+
+state 128:
+
+	aexp : LET ldecs . IN exp_ps END 
+
+	IN	shift 233
+
+
+	.	error
+
+
+state 129:
+
+	ldecs : ldec . ldecs 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 234
+
+	.	reduce by rule 218
+
+
+state 130:
+
+	ldecs : LOCAL . ldecs IN ldecs END ldecs 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 235
+
+	.	reduce by rule 218
+
+
+state 131:
+
+	ldecs : SEMICOLON . ldecs 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 236
+
+	.	reduce by rule 218
+
+
+state 132:
+
+	fixity : INFIXR int .  (reduce by rule 199)
+
+
+
+	.	reduce by rule 199
+
+
+state 133:
+
+	fixity : INFIX int .  (reduce by rule 197)
+
+
+
+	.	reduce by rule 197
+
+
+state 134:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : IF exp . THEN exp ELSE exp 
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	THEN	shift 237
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	error
+
+
+state 135:
+
+	aexp : HASH selector .  (reduce by rule 98)
+
+
+
+	.	reduce by rule 98
+
+
+state 136:
+
+	sdec : FUNCTOR fctb .  (reduce by rule 301)
+	fctb : fctb . AND fctb 
+
+	AND	shift 238
+
+
+	.	reduce by rule 301
+
+
+state 137:
+
+	fctb : ident . fparamList sigconstraint_op EQUALOP str 
+	fctb : ident . fsigconstraint_op EQUALOP fct_exp 
+
+	COLON	shift 242
+	COLONGT	shift 241
+	LPAREN	shift 178
+
+	fsigconstraint_op	goto 240
+	fparamList	goto 239
+
+	.	reduce by rule 267
+
+
+state 138:
+
+	ldec : FUN tyvarseq . fb 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 143
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	fb'	goto 142
+	fb	goto 243
+	apats	goto 140
+	clause	goto 139
+
+	.	error
+
+
+state 139:
+
+	fb' : clause .  (reduce by rule 163)
+	fb' : clause . BAR fb' 
+
+	BAR	shift 244
+
+
+	.	reduce by rule 163
+
+
+state 140:
+
+	clause : apats . constraint EQUALOP exp 
+
+	COLON	shift 246
+
+	constraint	goto 245
+
+	.	reduce by rule 156
+
+
+state 141:
+
+	ldec : FUN fb .  (reduce by rule 205)
+
+
+
+	.	reduce by rule 205
+
+
+state 142:
+
+	fb : fb' .  (reduce by rule 165)
+	fb : fb' . AND fb 
+
+	AND	shift 247
+
+
+	.	reduce by rule 165
+
+
+state 143:
+
+	fb : LAZY . fb' 
+	fb : LAZY . fb' AND fb 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	fb'	goto 248
+	apats	goto 140
+	clause	goto 139
+
+	.	error
+
+
+state 144:
+
+	rule : pat . DARROW exp 
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+
+	AS	shift 193
+	DARROW	shift 249
+	COLON	shift 191
+
+
+	.	error
+
+error:  state 145: shift/reduce conflict (shift BAR, reduce by rule 65)
+
+state 145:
+
+	match : rule .  (reduce by rule 65)
+	match : rule . BAR match 
+
+	BAR	shift 250
+
+
+	.	reduce by rule 65
+
+
+state 146:
+
+	exp : FN match .  (reduce by rule 78)
+
+
+
+	.	reduce by rule 78
+
+
+state 147:
+
+	apat : LPAREN . pat RPAREN 
+	apat : LPAREN . RPAREN 
+	apat : LPAREN . pat COMMA pat_list RPAREN 
+	apat : LPAREN . pat BAR or_pat_list RPAREN 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	RPAREN	shift 199
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 198
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 148:
+
+	eb : eb . AND eb 
+	ldec : EXCEPTION eb .  (reduce by rule 212)
+
+	AND	shift 251
+
+
+	.	reduce by rule 212
+
+
+state 149:
+
+	eb : op_op . ident 
+	eb : op_op . ident OF ty 
+	eb : op_op . ident EQUALOP qid 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 252
+
+	.	error
+
+
+state 150:
+
+	op_op : OP .  (reduce by rule 7)
+
+
+
+	.	reduce by rule 7
+
+
+state 151:
+
+	db : db . AND db 
+	ldec : DATATYPE db .  (reduce by rule 208)
+	ldec : DATATYPE db . WITHTYPE tb 
+
+	AND	shift 254
+	WITHTYPE	shift 253
+
+
+	.	reduce by rule 208
+
+
+state 152:
+
+	db : tyvars . ident EQUALOP dbrhs 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 255
+
+	.	error
+
+
+state 153:
+
+	db : LAZY . tyvars ident EQUALOP dbrhs 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tyvars	goto 256
+
+	.	reduce by rule 176
+
+
+state 154:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : CASE exp . OF match 
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	OF	shift 257
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	error
+
+
+state 155:
+
+	db : db . AND db 
+	ldec : ABSTYPE db . WITH ldecs END 
+	ldec : ABSTYPE db . WITHTYPE tb WITH ldecs END 
+
+	AND	shift 254
+	WITH	shift 259
+	WITHTYPE	shift 258
+
+
+	.	error
+
+
+state 156:
+
+	aexp : ID DOT . qid 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 260
+
+	.	error
+
+
+state 157:
+
+	ops : ident ops .  (reduce by rule 223)
+
+
+
+	.	reduce by rule 223
+
+
+state 158:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp ANDALSO exp .  (reduce by rule 75)
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+
+	COLON	shift 59
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 75
+
+
+state 159:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp ORELSE exp .  (reduce by rule 74)
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 74
+
+
+state 160:
+
+	ty : ty . ARROW ty 
+	exp : exp COLON ty .  (reduce by rule 76)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 76
+
+
+state 161:
+
+	ty : tuple_ty .  (reduce by rule 27)
+
+
+
+	.	reduce by rule 27
+
+
+state 162:
+
+	ty' : ty' . tycon 
+	tuple_ty : ty' . ASTERISK tuple_ty 
+	tuple_ty : ty' . ASTERISK ty' 
+	ty : ty' .  (reduce by rule 29)
+
+	ID	shift 168
+	ASTERISK	shift 263
+
+	tycon	goto 262
+
+	.	reduce by rule 29
+
+
+state 163:
+
+	ty' : tycon .  (reduce by rule 24)
+
+
+
+	.	reduce by rule 24
+
+
+state 164:
+
+	exp : exp COLON IMPORT . ffity 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 264
+
+	.	reduce by rule 45
+
+
+state 165:
+
+	ty' : LPAREN . ty0_pc RPAREN tycon 
+	ty' : LPAREN . ty RPAREN 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 277
+	ty0_pc	goto 276
+
+	.	error
+
+
+state 166:
+
+	ty' : LBRACE . tlabels RBRACE 
+	ty' : LBRACE . RBRACE 
+
+	ID	shift 87
+	INT	shift 86
+	ASTERISK	shift 85
+	RBRACE	shift 281
+
+	id	goto 83
+	selector	goto 280
+	tlabel	goto 279
+	tlabels	goto 278
+
+	.	error
+
+
+state 167:
+
+	ty' : TYVAR .  (reduce by rule 18)
+
+
+
+	.	reduce by rule 18
+
+
+state 168:
+
+	tycon : ID . DOT tycon 
+	tycon : ID .  (reduce by rule 14)
+
+	DOT	shift 282
+
+
+	.	reduce by rule 14
+
+
+state 169:
+
+	exp : exp HANDLE match .  (reduce by rule 73)
+
+
+
+	.	reduce by rule 73
+
+
+state 170:
+
+	exp : FFIAPPLY cconv aexp . LPAREN ffiApplyArgs RPAREN COLON ffity 
+
+	LPAREN	shift 283
+
+
+	.	error
+
+
+state 171:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : CAST LPAREN exp . RPAREN 
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	RPAREN	shift 284
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	error
+
+
+state 172:
+
+	quote : BEGINQ ot_list ENDQ .  (reduce by rule 112)
+
+
+
+	.	reduce by rule 112
+
+
+state 173:
+
+	ot_list : OBJL aexp .  (reduce by rule 113)
+	ot_list : OBJL aexp . ot_list 
+
+	OBJL	shift 67
+
+	ot_list	goto 285
+
+	.	reduce by rule 113
+
+
+state 174:
+
+	aexp : VECTORSTART exp_list RBRACKET .  (reduce by rule 106)
+
+
+
+	.	reduce by rule 106
+
+
+state 175:
+
+	exp_list : exp COMMA . exp_list 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 70
+	app_exp	goto 7
+	aexp	goto 6
+	exp_list	goto 286
+	quote	goto 5
+
+	.	error
+
+
+state 176:
+
+	fsigb : fsigb AND . fsigb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 73
+	fsigb	goto 287
+
+	.	error
+
+
+state 177:
+
+	fsigb : ident fparamList . EQUALOP sign 
+
+	EQUALOP	shift 288
+
+
+	.	error
+
+
+state 178:
+
+	fparamList : LPAREN . fparam RPAREN 
+	fparamList : LPAREN . fparam RPAREN fparamList 
+
+	SEMICOLON	shift 302
+	ID	shift 301
+	DATATYPE	shift 300
+	EQTYPE	shift 299
+	EXCEPTION	shift 298
+	FUNCTOR	shift 297
+	INCLUDE	shift 296
+	SHARING	shift 295
+	STRUCTURE	shift 294
+	TYPE	shift 293
+	VAL	shift 292
+
+	spec_s	goto 291
+	spec	goto 290
+	fparam	goto 289
+
+	.	reduce by rule 224
+
+
+state 179:
+
+	aexp : LPAREN exp_2c RPAREN .  (reduce by rule 103)
+
+
+
+	.	reduce by rule 103
+
+
+state 180:
+
+	exp_2c : exp COMMA . exp_2c 
+	exp_2c : exp COMMA . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 304
+	app_exp	goto 7
+	aexp	goto 6
+	exp_2c	goto 303
+	quote	goto 5
+
+	.	error
+
+
+state 181:
+
+	exp_ps : exp SEMICOLON . exp_ps 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp_ps	goto 306
+	exp	goto 305
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 182:
+
+	aexp : LPAREN exp_ps RPAREN .  (reduce by rule 102)
+
+
+
+	.	reduce by rule 102
+
+
+state 183:
+
+	aexp : LBRACKET exp_list RBRACKET .  (reduce by rule 104)
+
+
+
+	.	reduce by rule 104
+
+
+state 184:
+
+	aexp : LBRACE elabels RBRACE .  (reduce by rule 99)
+
+
+
+	.	reduce by rule 99
+
+
+state 185:
+
+	elabels : elabel COMMA . elabels 
+
+	ID	shift 87
+	INT	shift 86
+	ASTERISK	shift 85
+
+	id	goto 83
+	selector	goto 82
+	elabel	goto 81
+	elabels	goto 307
+
+	.	error
+
+
+state 186:
+
+	elabel : selector EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 308
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 187:
+
+	exp : WHILE exp DO . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 309
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 188:
+
+	vb : vb . AND vb 
+	ldec : VAL tyvarseq vb .  (reduce by rule 202)
+
+	AND	shift 189
+
+
+	.	reduce by rule 202
+
+
+state 189:
+
+	vb : vb AND . vb 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 104
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 94
+	apat	goto 93
+	apat'	goto 92
+	vb	goto 310
+	apats	goto 90
+
+	.	error
+
+
+state 190:
+
+	apats : apat apats .  (reduce by rule 170)
+
+
+
+	.	reduce by rule 170
+
+
+state 191:
+
+	pat : pat COLON . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 311
+
+	.	error
+
+
+state 192:
+
+	vb : pat EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 312
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 193:
+
+	pat : pat AS . pat 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 313
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 194:
+
+	apat' : VECTORSTART pat_list . RBRACKET 
+
+	RBRACKET	shift 314
+
+
+	.	error
+
+
+state 195:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	pat_list : pat .  (reduce by rule 149)
+	pat_list : pat . COMMA pat_list 
+
+	AS	shift 193
+	COLON	shift 191
+	COMMA	shift 315
+
+
+	.	reduce by rule 149
+
+
+state 196:
+
+	apat' : VECTORSTART RBRACKET .  (reduce by rule 137)
+
+
+
+	.	reduce by rule 137
+
+
+state 197:
+
+	tyvarseq : LPAREN tyvar_pc . RPAREN 
+
+	RPAREN	shift 316
+
+
+	.	error
+
+
+state 198:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	apat : LPAREN pat . RPAREN 
+	apat : LPAREN pat . COMMA pat_list RPAREN 
+	apat : LPAREN pat . BAR or_pat_list RPAREN 
+
+	AS	shift 193
+	BAR	shift 319
+	COLON	shift 191
+	COMMA	shift 318
+	RPAREN	shift 317
+
+
+	.	error
+
+
+state 199:
+
+	apat : LPAREN RPAREN .  (reduce by rule 125)
+
+
+
+	.	reduce by rule 125
+
+
+state 200:
+
+	tyvar_pc : TYVAR .  (reduce by rule 179)
+	tyvar_pc : TYVAR . COMMA tyvar_pc 
+
+	COMMA	shift 320
+
+
+	.	reduce by rule 179
+
+
+state 201:
+
+	apat' : LBRACKET pat_list . RBRACKET 
+
+	RBRACKET	shift 321
+
+
+	.	error
+
+
+state 202:
+
+	apat' : LBRACKET RBRACKET .  (reduce by rule 135)
+
+
+
+	.	reduce by rule 135
+
+
+state 203:
+
+	apat' : LBRACE plabels . RBRACE 
+
+	RBRACE	shift 322
+
+
+	.	error
+
+
+state 204:
+
+	plabels : plabel . COMMA plabels 
+	plabels : plabel .  (reduce by rule 147)
+
+	COMMA	shift 323
+
+
+	.	reduce by rule 147
+
+
+state 205:
+
+	plabel : selector . EQUALOP pat 
+
+	EQUALOP	shift 324
+
+
+	.	error
+
+
+state 206:
+
+	apat' : LBRACE RBRACE .  (reduce by rule 139)
+
+
+
+	.	reduce by rule 139
+
+
+state 207:
+
+	plabels : DOTDOTDOT .  (reduce by rule 148)
+
+
+
+	.	reduce by rule 148
+
+
+state 208:
+
+	id : ID .  (reduce by rule 2)
+	plabel : ID .  (reduce by rule 142)
+	plabel : ID . AS pat 
+	plabel : ID . COLON ty 
+	plabel : ID . COLON ty AS pat 
+
+	AS	shift 326
+	EQUALOP	reduce by rule 2
+	COLON	shift 325
+	COMMA	reduce by rule 142
+	RBRACE	reduce by rule 142
+
+
+	.	error
+
+
+state 209:
+
+	ldec : VAL REC tyvarseq . rvb 
+
+	ID	shift 87
+	LAZY	shift 214
+	OP	shift 213
+	ASTERISK	shift 85
+
+	id	goto 211
+	rvb	goto 327
+
+	.	error
+
+
+state 210:
+
+	rvb : rvb . AND rvb 
+	ldec : VAL REC rvb .  (reduce by rule 203)
+
+	AND	shift 328
+
+
+	.	reduce by rule 203
+
+
+state 211:
+
+	rvb : id . constraint EQUALOP exp 
+
+	COLON	shift 246
+
+	constraint	goto 329
+
+	.	reduce by rule 156
+
+
+state 212:
+
+	tyvarseq : LPAREN . tyvar_pc RPAREN 
+
+	TYVAR	shift 200
+
+	tyvar_pc	goto 197
+
+	.	error
+
+
+state 213:
+
+	rvb : OP . id constraint EQUALOP exp 
+
+	ID	shift 87
+	ASTERISK	shift 85
+
+	id	goto 330
+
+	.	error
+
+
+state 214:
+
+	rvb : LAZY . id constraint EQUALOP exp 
+	rvb : LAZY . OP id constraint EQUALOP exp 
+
+	ID	shift 87
+	OP	shift 332
+	ASTERISK	shift 85
+
+	id	goto 331
+
+	.	error
+
+
+state 215:
+
+	apat' : OP ident .  (reduce by rule 128)
+
+
+
+	.	reduce by rule 128
+
+
+state 216:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	vb : LAZY pat . EQUALOP exp 
+
+	AS	shift 193
+	EQUALOP	shift 333
+	COLON	shift 191
+
+
+	.	error
+
+
+state 217:
+
+	apat' : ID DOT . qid 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 334
+
+	.	error
+
+
+state 218:
+
+	tb : tyvars ID . EQUALOP ty 
+
+	EQUALOP	shift 335
+
+
+	.	error
+
+
+state 219:
+
+	tb : tb AND . tb 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tb	goto 336
+	tyvars	goto 110
+
+	.	reduce by rule 176
+
+
+state 220:
+
+	tyvars : LPAREN tyvar_pc . RPAREN 
+
+	RPAREN	shift 337
+
+
+	.	error
+
+
+state 221:
+
+	strb : strb AND . strb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 115
+	strb	goto 338
+
+	.	error
+
+
+state 222:
+
+	strb : ident sigconstraint_op . EQUALOP str 
+
+	EQUALOP	shift 339
+
+
+	.	error
+
+
+state 223:
+
+	sigconstraint_op : COLONGT . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 340
+
+	.	error
+
+
+state 224:
+
+	sigconstraint_op : COLON . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 343
+
+	.	error
+
+
+state 225:
+
+	sigb : sigb AND . sigb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 117
+	sigb	goto 344
+
+	.	error
+
+
+state 226:
+
+	sigb : ident EQUALOP . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 345
+
+	.	error
+
+
+state 227:
+
+	ldec : OVERLOAD ident COLON . ty AS exp_pa 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 346
+
+	.	error
+
+
+state 228:
+
+	qid_p : qid qid_p .  (reduce by rule 195)
+
+
+
+	.	reduce by rule 195
+
+
+state 229:
+
+	qid : ID DOT . qid 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 347
+
+	.	error
+
+
+state 230:
+
+	sdec : LOCAL sdecs IN . sdecs END 
+
+	SEMICOLON	shift 127
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 37
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 31
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	SIGNATURE	shift 25
+	STRUCTURE	shift 24
+	TYPE	shift 23
+	VAL	shift 22
+	FUNSIG	shift 16
+
+	fixity	goto 4
+	ldec	goto 3
+	sdec	goto 126
+	sdecs	goto 348
+
+	.	reduce by rule 291
+
+
+state 231:
+
+	sdecs : sdec sdecs .  (reduce by rule 289)
+
+
+
+	.	reduce by rule 289
+
+
+state 232:
+
+	sdecs : SEMICOLON sdecs .  (reduce by rule 290)
+
+
+
+	.	reduce by rule 290
+
+
+state 233:
+
+	aexp : LET ldecs IN . exp_ps END 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp_ps	goto 349
+	exp	goto 305
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 234:
+
+	ldecs : ldec ldecs .  (reduce by rule 219)
+
+
+
+	.	reduce by rule 219
+
+
+state 235:
+
+	ldecs : LOCAL ldecs . IN ldecs END ldecs 
+
+	IN	shift 350
+
+
+	.	error
+
+
+state 236:
+
+	ldecs : SEMICOLON ldecs .  (reduce by rule 220)
+
+
+
+	.	reduce by rule 220
+
+
+state 237:
+
+	exp : IF exp THEN . exp ELSE exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 351
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 238:
+
+	fctb : fctb AND . fctb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 137
+	fctb	goto 352
+
+	.	error
+
+
+state 239:
+
+	fctb : ident fparamList . sigconstraint_op EQUALOP str 
+
+	COLON	shift 224
+	COLONGT	shift 223
+
+	sigconstraint_op	goto 353
+
+	.	reduce by rule 264
+
+
+state 240:
+
+	fctb : ident fsigconstraint_op . EQUALOP fct_exp 
+
+	EQUALOP	shift 354
+
+
+	.	error
+
+
+state 241:
+
+	fsigconstraint_op : COLONGT . ident 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 355
+
+	.	error
+
+
+state 242:
+
+	fsigconstraint_op : COLON . ident 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 356
+
+	.	error
+
+
+state 243:
+
+	ldec : FUN tyvarseq fb .  (reduce by rule 206)
+
+
+
+	.	reduce by rule 206
+
+
+state 244:
+
+	fb' : clause BAR . fb' 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	fb'	goto 357
+	apats	goto 140
+	clause	goto 139
+
+	.	error
+
+
+state 245:
+
+	clause : apats constraint . EQUALOP exp 
+
+	EQUALOP	shift 358
+
+
+	.	error
+
+
+state 246:
+
+	constraint : COLON . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 359
+
+	.	error
+
+
+state 247:
+
+	fb : fb' AND . fb 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 143
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	fb'	goto 142
+	fb	goto 360
+	apats	goto 140
+	clause	goto 139
+
+	.	error
+
+
+state 248:
+
+	fb : LAZY fb' .  (reduce by rule 166)
+	fb : LAZY fb' . AND fb 
+
+	AND	shift 361
+
+
+	.	reduce by rule 166
+
+
+state 249:
+
+	rule : pat DARROW . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 362
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 250:
+
+	match : rule BAR . match 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	match	goto 363
+	rule	goto 145
+	pat	goto 144
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 251:
+
+	eb : eb AND . eb 
+
+	OP	shift 150
+
+	op_op	goto 149
+	eb	goto 364
+
+	.	reduce by rule 8
+
+
+state 252:
+
+	eb : op_op ident .  (reduce by rule 190)
+	eb : op_op ident . OF ty 
+	eb : op_op ident . EQUALOP qid 
+
+	EQUALOP	shift 366
+	OF	shift 365
+
+
+	.	reduce by rule 190
+
+
+state 253:
+
+	ldec : DATATYPE db WITHTYPE . tb 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tb	goto 367
+	tyvars	goto 110
+
+	.	reduce by rule 176
+
+
+state 254:
+
+	db : db AND . db 
+
+	TYVAR	shift 113
+	LAZY	shift 153
+	LPAREN	shift 112
+
+	tyvars	goto 152
+	db	goto 368
+
+	.	reduce by rule 176
+
+
+state 255:
+
+	db : tyvars ident . EQUALOP dbrhs 
+
+	EQUALOP	shift 369
+
+
+	.	error
+
+
+state 256:
+
+	db : LAZY tyvars . ident EQUALOP dbrhs 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 370
+
+	.	error
+
+
+state 257:
+
+	exp : CASE exp OF . match 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	match	goto 371
+	rule	goto 145
+	pat	goto 144
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 258:
+
+	ldec : ABSTYPE db WITHTYPE . tb WITH ldecs END 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tb	goto 372
+	tyvars	goto 110
+
+	.	reduce by rule 176
+
+
+state 259:
+
+	ldec : ABSTYPE db WITH . ldecs END 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 373
+
+	.	reduce by rule 218
+
+
+state 260:
+
+	aexp : ID DOT qid .  (reduce by rule 92)
+
+
+
+	.	reduce by rule 92
+
+
+state 261:
+
+	ty : ty ARROW . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 374
+
+	.	error
+
+
+state 262:
+
+	ty' : ty' tycon .  (reduce by rule 23)
+
+
+
+	.	reduce by rule 23
+
+
+state 263:
+
+	tuple_ty : ty' ASTERISK . tuple_ty 
+	tuple_ty : ty' ASTERISK . ty' 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 376
+	tuple_ty	goto 375
+
+	.	error
+
+
+state 264:
+
+	exp : exp COLON IMPORT ffity .  (reduce by rule 84)
+
+
+
+	.	reduce by rule 84
+
+
+state 265:
+
+	ffiFunty : fficconv . ffiFunArg ARROW ffity 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 379
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 378
+	ffiFunArg	goto 377
+
+	.	reduce by rule 45
+
+
+state 266:
+
+	ffity : ffiFunty .  (reduce by rule 63)
+
+
+
+	.	reduce by rule 63
+
+
+state 267:
+
+	ffiFunty : ffiFunArg . ARROW ffity 
+
+	ARROW	shift 380
+
+
+	.	error
+
+
+state 268:
+
+	ffiFunArg : ffiTupleTy .  (reduce by rule 57)
+	ffity : ffiTupleTy .  (reduce by rule 64)
+
+	EOF	reduce by rule 64
+	SEMICOLON	reduce by rule 64
+	ABSTYPE	reduce by rule 64
+	AND	reduce by rule 64
+	ARROW	reduce by rule 57
+	BAR	reduce by rule 64
+	DATATYPE	reduce by rule 64
+	ELSE	reduce by rule 64
+	END	reduce by rule 64
+	EXCEPTION	reduce by rule 64
+	DO	reduce by rule 64
+	FUN	reduce by rule 64
+	FUNCTOR	reduce by rule 64
+	HANDLE	reduce by rule 64
+	IN	reduce by rule 64
+	INFIX	reduce by rule 64
+	INFIXR	reduce by rule 64
+	LOCAL	reduce by rule 64
+	NONFIX	reduce by rule 64
+	OF	reduce by rule 64
+	OPEN	reduce by rule 64
+	OVERLOAD	reduce by rule 64
+	SIGNATURE	reduce by rule 64
+	STRUCTURE	reduce by rule 64
+	THEN	reduce by rule 64
+	TYPE	reduce by rule 64
+	VAL	reduce by rule 64
+	COLON	reduce by rule 64
+	COMMA	reduce by rule 64
+	RBRACE	reduce by rule 64
+	RBRACKET	reduce by rule 64
+	RPAREN	reduce by rule 64
+	ORELSE	reduce by rule 64
+	ANDALSO	reduce by rule 64
+	FUNSIG	reduce by rule 64
+
+
+	.	error
+
+
+state 269:
+
+	ffiTupleTy : ffitupleseq .  (reduce by rule 54)
+
+
+
+	.	reduce by rule 54
+
+
+state 270:
+
+	ffiArgs : ffiAtty .  (reduce by rule 43)
+	ffitupleseq : ffiAtty . ASTERISK ffiAtty 
+	ffitupleseq : ffiAtty . ASTERISK ffitupleseq 
+	ffity : ffiAtty .  (reduce by rule 62)
+
+	EOF	reduce by rule 62
+	SEMICOLON	reduce by rule 62
+	ID	reduce by rule 43
+	ABSTYPE	reduce by rule 62
+	AND	reduce by rule 62
+	ARROW	reduce by rule 43
+	BAR	reduce by rule 62
+	DATATYPE	reduce by rule 62
+	ELSE	reduce by rule 62
+	END	reduce by rule 62
+	EXCEPTION	reduce by rule 62
+	DO	reduce by rule 62
+	FUN	reduce by rule 62
+	FUNCTOR	reduce by rule 62
+	HANDLE	reduce by rule 62
+	IN	reduce by rule 62
+	INFIX	reduce by rule 62
+	INFIXR	reduce by rule 62
+	LOCAL	reduce by rule 62
+	NONFIX	reduce by rule 62
+	OF	reduce by rule 62
+	OPEN	reduce by rule 62
+	OVERLOAD	reduce by rule 62
+	SIGNATURE	reduce by rule 62
+	STRUCTURE	reduce by rule 62
+	THEN	reduce by rule 62
+	TYPE	reduce by rule 62
+	VAL	reduce by rule 62
+	ASTERISK	shift 381
+	COLON	reduce by rule 62
+	COMMA	reduce by rule 62
+	RBRACE	reduce by rule 62
+	RBRACKET	reduce by rule 62
+	RPAREN	reduce by rule 62
+	ORELSE	reduce by rule 62
+	ANDALSO	reduce by rule 62
+	FUNSIG	reduce by rule 62
+
+
+	.	error
+
+
+state 271:
+
+	ffiAtty : ffiContyArg . tycon 
+
+	ID	shift 168
+
+	tycon	goto 382
+
+	.	error
+
+
+state 272:
+
+	ffiContyArg : ffiArgs .  (reduce by rule 46)
+	ffiFunArg : ffiArgs .  (reduce by rule 56)
+
+	ID	reduce by rule 46
+	ARROW	reduce by rule 56
+
+
+	.	error
+
+
+state 273:
+
+	ffiArgs : LPAREN . ffityseq RPAREN 
+	ffiAtty : LPAREN . ffity RPAREN 
+	ffiFunArg : LPAREN . RPAREN 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	RPAREN	shift 385
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffityseq	goto 384
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 383
+
+	.	reduce by rule 45
+
+
+state 274:
+
+	ffiAtty : LBRACE . ffityrow RBRACE 
+	ffiAtty : LBRACE . RBRACE 
+
+	ID	shift 388
+	RBRACE	shift 387
+
+	ffityrow	goto 386
+
+	.	error
+
+
+state 275:
+
+	ffiAtty : TYVAR .  (reduce by rule 48)
+
+
+
+	.	reduce by rule 48
+
+
+state 276:
+
+	ty' : LPAREN ty0_pc . RPAREN tycon 
+
+	RPAREN	shift 389
+
+
+	.	error
+
+
+state 277:
+
+	ty' : LPAREN ty . RPAREN 
+	ty : ty . ARROW ty 
+	ty0_pc : ty . COMMA ty 
+	ty0_pc : ty . COMMA ty0_pc 
+
+	ARROW	shift 261
+	COMMA	shift 391
+	RPAREN	shift 390
+
+
+	.	error
+
+
+state 278:
+
+	ty' : LBRACE tlabels . RBRACE 
+
+	RBRACE	shift 392
+
+
+	.	error
+
+
+state 279:
+
+	tlabels : tlabel . COMMA tlabels 
+	tlabels : tlabel .  (reduce by rule 17)
+
+	COMMA	shift 393
+
+
+	.	reduce by rule 17
+
+
+state 280:
+
+	tlabel : selector . COLON ty 
+
+	COLON	shift 394
+
+
+	.	error
+
+
+state 281:
+
+	ty' : LBRACE RBRACE .  (reduce by rule 20)
+
+
+
+	.	reduce by rule 20
+
+
+state 282:
+
+	tycon : ID DOT . tycon 
+
+	ID	shift 168
+
+	tycon	goto 395
+
+	.	error
+
+
+state 283:
+
+	exp : FFIAPPLY cconv aexp LPAREN . ffiApplyArgs RPAREN COLON ffity 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	EQUALOP	shift 41
+	HASH	shift 36
+	LET	shift 32
+	OP	shift 29
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	SIZEOF	shift 400
+
+	ident	goto 10
+	int	goto 9
+	app_exp	goto 399
+	aexp	goto 6
+	quote	goto 5
+	ffiApplyArg	goto 398
+	ffiApplyArgs	goto 397
+	ffiApplyArgSeq	goto 396
+
+	.	reduce by rule 37
+
+
+state 284:
+
+	exp : CAST LPAREN exp RPAREN .  (reduce by rule 83)
+
+
+
+	.	reduce by rule 83
+
+
+state 285:
+
+	ot_list : OBJL aexp ot_list .  (reduce by rule 114)
+
+
+
+	.	reduce by rule 114
+
+
+state 286:
+
+	exp_list : exp COMMA exp_list .  (reduce by rule 118)
+
+
+
+	.	reduce by rule 118
+
+
+state 287:
+
+	fsigb : fsigb . AND fsigb 
+	fsigb : fsigb AND fsigb .  (reduce by rule 272)
+
+	AND	shift 176
+
+
+	.	reduce by rule 272
+
+
+state 288:
+
+	fsigb : ident fparamList EQUALOP . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 401
+
+	.	error
+
+
+state 289:
+
+	fparamList : LPAREN fparam . RPAREN 
+	fparamList : LPAREN fparam . RPAREN fparamList 
+
+	RPAREN	shift 402
+
+
+	.	error
+
+
+state 290:
+
+	spec_s : spec . spec_s 
+
+	SEMICOLON	shift 302
+	DATATYPE	shift 300
+	EQTYPE	shift 299
+	EXCEPTION	shift 298
+	FUNCTOR	shift 297
+	INCLUDE	shift 296
+	SHARING	shift 295
+	STRUCTURE	shift 294
+	TYPE	shift 293
+	VAL	shift 292
+
+	spec_s	goto 403
+	spec	goto 290
+
+	.	reduce by rule 224
+
+
+state 291:
+
+	fparam : spec_s .  (reduce by rule 307)
+
+
+
+	.	reduce by rule 307
+
+
+state 292:
+
+	spec : VAL . valspec 
+
+	OP	shift 150
+
+	op_op	goto 405
+	valspec	goto 404
+
+	.	reduce by rule 8
+
+
+state 293:
+
+	spec : TYPE . tyspec 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tyvars	goto 407
+	tyspec	goto 406
+
+	.	reduce by rule 176
+
+
+state 294:
+
+	spec : STRUCTURE . strspec 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 409
+	strspec	goto 408
+
+	.	error
+
+
+state 295:
+
+	spec : SHARING . sharespec 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	TYPE	shift 413
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 412
+	sharespec	goto 411
+	patheqn	goto 410
+
+	.	error
+
+
+state 296:
+
+	spec : INCLUDE . sign 
+	spec : INCLUDE . ident idents 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 415
+	sign	goto 414
+
+	.	error
+
+
+state 297:
+
+	spec : FUNCTOR . fctspec 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 417
+	fctspec	goto 416
+
+	.	error
+
+
+state 298:
+
+	spec : EXCEPTION . exnspec 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 419
+	exnspec	goto 418
+
+	.	error
+
+
+state 299:
+
+	spec : EQTYPE . tyspec 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tyvars	goto 407
+	tyspec	goto 420
+
+	.	reduce by rule 176
+
+
+state 300:
+
+	spec : DATATYPE . db 
+	spec : DATATYPE . db WITHTYPE tb 
+
+	TYVAR	shift 113
+	LAZY	shift 153
+	LPAREN	shift 112
+
+	tyvars	goto 152
+	db	goto 421
+
+	.	reduce by rule 176
+
+
+state 301:
+
+	fparam : ID . COLON sign 
+
+	COLON	shift 422
+
+
+	.	error
+
+
+state 302:
+
+	spec_s : SEMICOLON . spec_s 
+
+	SEMICOLON	shift 302
+	DATATYPE	shift 300
+	EQTYPE	shift 299
+	EXCEPTION	shift 298
+	FUNCTOR	shift 297
+	INCLUDE	shift 296
+	SHARING	shift 295
+	STRUCTURE	shift 294
+	TYPE	shift 293
+	VAL	shift 292
+
+	spec_s	goto 423
+	spec	goto 290
+
+	.	reduce by rule 224
+
+
+state 303:
+
+	exp_2c : exp COMMA exp_2c .  (reduce by rule 115)
+
+
+
+	.	reduce by rule 115
+
+
+state 304:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	exp_2c : exp . COMMA exp_2c 
+	exp_2c : exp . COMMA exp 
+	exp_2c : exp COMMA exp .  (reduce by rule 116)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	COMMA	shift 180
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 116
+
+
+state 305:
+
+	exp_ps : exp .  (reduce by rule 71)
+	exp_ps : exp . SEMICOLON exp_ps 
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+
+	SEMICOLON	shift 181
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 71
+
+
+state 306:
+
+	exp_ps : exp SEMICOLON exp_ps .  (reduce by rule 72)
+
+
+
+	.	reduce by rule 72
+
+
+state 307:
+
+	elabels : elabel COMMA elabels .  (reduce by rule 69)
+
+
+
+	.	reduce by rule 69
+
+
+state 308:
+
+	elabel : selector EQUALOP exp .  (reduce by rule 68)
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 68
+
+
+state 309:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : WHILE exp DO exp .  (reduce by rule 80)
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 80
+
+
+state 310:
+
+	vb : vb . AND vb 
+	vb : vb AND vb .  (reduce by rule 153)
+
+	AND	shift 189
+
+
+	.	reduce by rule 153
+
+
+state 311:
+
+	ty : ty . ARROW ty 
+	pat : pat COLON ty .  (reduce by rule 120)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 120
+
+
+state 312:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	vb : pat EQUALOP exp .  (reduce by rule 155)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 155
+
+
+state 313:
+
+	pat : pat . AS pat 
+	pat : pat AS pat .  (reduce by rule 119)
+	pat : pat . COLON ty 
+
+	AS	shift 193
+	COLON	shift 191
+
+
+	.	reduce by rule 119
+
+
+state 314:
+
+	apat' : VECTORSTART pat_list RBRACKET .  (reduce by rule 138)
+
+
+
+	.	reduce by rule 138
+
+
+state 315:
+
+	pat_list : pat COMMA . pat_list 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 195
+	apat	goto 93
+	apat'	goto 92
+	pat_list	goto 424
+	apats	goto 90
+
+	.	error
+
+
+state 316:
+
+	tyvarseq : LPAREN tyvar_pc RPAREN .  (reduce by rule 178)
+
+
+
+	.	reduce by rule 178
+
+
+state 317:
+
+	apat : LPAREN pat RPAREN .  (reduce by rule 123)
+
+
+
+	.	reduce by rule 123
+
+
+state 318:
+
+	apat : LPAREN pat COMMA . pat_list RPAREN 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 195
+	apat	goto 93
+	apat'	goto 92
+	pat_list	goto 425
+	apats	goto 90
+
+	.	error
+
+
+state 319:
+
+	apat : LPAREN pat BAR . or_pat_list RPAREN 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 427
+	apat	goto 93
+	apat'	goto 92
+	or_pat_list	goto 426
+	apats	goto 90
+
+	.	error
+
+
+state 320:
+
+	tyvar_pc : TYVAR COMMA . tyvar_pc 
+
+	TYVAR	shift 200
+
+	tyvar_pc	goto 428
+
+	.	error
+
+
+state 321:
+
+	apat' : LBRACKET pat_list RBRACKET .  (reduce by rule 136)
+
+
+
+	.	reduce by rule 136
+
+
+state 322:
+
+	apat' : LBRACE plabels RBRACE .  (reduce by rule 140)
+
+
+
+	.	reduce by rule 140
+
+
+state 323:
+
+	plabels : plabel COMMA . plabels 
+
+	ID	shift 208
+	INT	shift 86
+	DOTDOTDOT	shift 207
+	ASTERISK	shift 85
+
+	id	goto 83
+	selector	goto 205
+	plabel	goto 204
+	plabels	goto 429
+
+	.	error
+
+
+state 324:
+
+	plabel : selector EQUALOP . pat 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 430
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 325:
+
+	plabel : ID COLON . ty 
+	plabel : ID COLON . ty AS pat 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 431
+
+	.	error
+
+
+state 326:
+
+	plabel : ID AS . pat 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 432
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 327:
+
+	rvb : rvb . AND rvb 
+	ldec : VAL REC tyvarseq rvb .  (reduce by rule 204)
+
+	AND	shift 328
+
+
+	.	reduce by rule 204
+
+
+state 328:
+
+	rvb : rvb AND . rvb 
+
+	ID	shift 87
+	LAZY	shift 214
+	OP	shift 213
+	ASTERISK	shift 85
+
+	id	goto 211
+	rvb	goto 433
+
+	.	error
+
+
+state 329:
+
+	rvb : id constraint . EQUALOP exp 
+
+	EQUALOP	shift 434
+
+
+	.	error
+
+
+state 330:
+
+	rvb : OP id . constraint EQUALOP exp 
+
+	COLON	shift 246
+
+	constraint	goto 435
+
+	.	reduce by rule 156
+
+
+state 331:
+
+	rvb : LAZY id . constraint EQUALOP exp 
+
+	COLON	shift 246
+
+	constraint	goto 436
+
+	.	reduce by rule 156
+
+
+state 332:
+
+	rvb : LAZY OP . id constraint EQUALOP exp 
+
+	ID	shift 87
+	ASTERISK	shift 85
+
+	id	goto 437
+
+	.	error
+
+
+state 333:
+
+	vb : LAZY pat EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 438
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 334:
+
+	apat' : ID DOT qid .  (reduce by rule 129)
+
+
+
+	.	reduce by rule 129
+
+
+state 335:
+
+	tb : tyvars ID EQUALOP . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 439
+
+	.	error
+
+
+state 336:
+
+	tb : tb . AND tb 
+	tb : tb AND tb .  (reduce by rule 173)
+
+	AND	shift 219
+
+
+	.	reduce by rule 173
+
+
+state 337:
+
+	tyvars : LPAREN tyvar_pc RPAREN .  (reduce by rule 175)
+
+
+
+	.	reduce by rule 175
+
+
+state 338:
+
+	strb : strb . AND strb 
+	strb : strb AND strb .  (reduce by rule 305)
+
+	AND	shift 221
+
+
+	.	reduce by rule 305
+
+
+state 339:
+
+	strb : ident sigconstraint_op EQUALOP . str 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	LET	shift 443
+	STRUCT	shift 442
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 441
+	str	goto 440
+
+	.	error
+
+
+state 340:
+
+	sign : sign . WHERE whspec 
+	sigconstraint_op : COLONGT sign .  (reduce by rule 266)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 266
+
+
+state 341:
+
+	sign : ident .  (reduce by rule 261)
+
+
+
+	.	reduce by rule 261
+
+
+state 342:
+
+	sign : SIG . spec_s END 
+
+	SEMICOLON	shift 302
+	DATATYPE	shift 300
+	EQTYPE	shift 299
+	EXCEPTION	shift 298
+	FUNCTOR	shift 297
+	INCLUDE	shift 296
+	SHARING	shift 295
+	STRUCTURE	shift 294
+	TYPE	shift 293
+	VAL	shift 292
+
+	spec_s	goto 445
+	spec	goto 290
+
+	.	reduce by rule 224
+
+
+state 343:
+
+	sign : sign . WHERE whspec 
+	sigconstraint_op : COLON sign .  (reduce by rule 265)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 265
+
+
+state 344:
+
+	sigb : sigb . AND sigb 
+	sigb : sigb AND sigb .  (reduce by rule 270)
+
+	AND	shift 225
+
+
+	.	reduce by rule 270
+
+
+state 345:
+
+	sign : sign . WHERE whspec 
+	sigb : ident EQUALOP sign .  (reduce by rule 271)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 271
+
+
+state 346:
+
+	ty : ty . ARROW ty 
+	ldec : OVERLOAD ident COLON ty . AS exp_pa 
+
+	ARROW	shift 261
+	AS	shift 446
+
+
+	.	error
+
+
+state 347:
+
+	qid : ID DOT qid .  (reduce by rule 9)
+
+
+
+	.	reduce by rule 9
+
+
+state 348:
+
+	sdec : LOCAL sdecs IN sdecs . END 
+
+	END	shift 447
+
+
+	.	error
+
+
+state 349:
+
+	aexp : LET ldecs IN exp_ps . END 
+
+	END	shift 448
+
+
+	.	error
+
+
+state 350:
+
+	ldecs : LOCAL ldecs IN . ldecs END ldecs 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 449
+
+	.	reduce by rule 218
+
+
+state 351:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : IF exp THEN exp . ELSE exp 
+	exp : exp . COLON IMPORT ffity 
+
+	ELSE	shift 450
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	error
+
+
+state 352:
+
+	fctb : fctb . AND fctb 
+	fctb : fctb AND fctb .  (reduce by rule 312)
+
+	AND	shift 238
+
+
+	.	reduce by rule 312
+
+
+state 353:
+
+	fctb : ident fparamList sigconstraint_op . EQUALOP str 
+
+	EQUALOP	shift 451
+
+
+	.	error
+
+
+state 354:
+
+	fctb : ident fsigconstraint_op EQUALOP . fct_exp 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	LET	shift 454
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 453
+	fct_exp	goto 452
+
+	.	error
+
+
+state 355:
+
+	fsigconstraint_op : COLONGT ident .  (reduce by rule 269)
+
+
+
+	.	reduce by rule 269
+
+
+state 356:
+
+	fsigconstraint_op : COLON ident .  (reduce by rule 268)
+
+
+
+	.	reduce by rule 268
+
+
+state 357:
+
+	fb' : clause BAR fb' .  (reduce by rule 164)
+
+
+
+	.	reduce by rule 164
+
+
+state 358:
+
+	clause : apats constraint EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 455
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 359:
+
+	ty : ty . ARROW ty 
+	constraint : COLON ty .  (reduce by rule 157)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 157
+
+
+state 360:
+
+	fb : fb' AND fb .  (reduce by rule 167)
+
+
+
+	.	reduce by rule 167
+
+
+state 361:
+
+	fb : LAZY fb' AND . fb 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	LAZY	shift 143
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	apat	goto 93
+	apat'	goto 92
+	fb'	goto 142
+	fb	goto 456
+	apats	goto 140
+	clause	goto 139
+
+	.	error
+
+
+state 362:
+
+	rule : pat DARROW exp .  (reduce by rule 67)
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 67
+
+
+state 363:
+
+	match : rule BAR match .  (reduce by rule 66)
+
+
+
+	.	reduce by rule 66
+
+
+state 364:
+
+	eb : eb . AND eb 
+	eb : eb AND eb .  (reduce by rule 193)
+
+	AND	shift 251
+
+
+	.	reduce by rule 193
+
+
+state 365:
+
+	eb : op_op ident OF . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 457
+
+	.	error
+
+
+state 366:
+
+	eb : op_op ident EQUALOP . qid 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 458
+
+	.	error
+
+
+state 367:
+
+	tb : tb . AND tb 
+	ldec : DATATYPE db WITHTYPE tb .  (reduce by rule 209)
+
+	AND	shift 219
+
+
+	.	reduce by rule 209
+
+
+state 368:
+
+	db : db . AND db 
+	db : db AND db .  (reduce by rule 181)
+
+	AND	shift 254
+
+
+	.	reduce by rule 181
+
+
+state 369:
+
+	db : tyvars ident EQUALOP . dbrhs 
+
+	DATATYPE	shift 463
+	OP	shift 150
+
+	op_op	goto 462
+	dbrhs	goto 461
+	constrs	goto 460
+	constr	goto 459
+
+	.	reduce by rule 8
+
+
+state 370:
+
+	db : LAZY tyvars ident . EQUALOP dbrhs 
+
+	EQUALOP	shift 464
+
+
+	.	error
+
+
+state 371:
+
+	exp : CASE exp OF match .  (reduce by rule 79)
+
+
+
+	.	reduce by rule 79
+
+
+state 372:
+
+	tb : tb . AND tb 
+	ldec : ABSTYPE db WITHTYPE tb . WITH ldecs END 
+
+	AND	shift 219
+	WITH	shift 465
+
+
+	.	error
+
+
+state 373:
+
+	ldec : ABSTYPE db WITH ldecs . END 
+
+	END	shift 466
+
+
+	.	error
+
+
+state 374:
+
+	ty : ty . ARROW ty 
+	ty : ty ARROW ty .  (reduce by rule 28)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 28
+
+
+state 375:
+
+	tuple_ty : ty' ASTERISK tuple_ty .  (reduce by rule 25)
+
+
+
+	.	reduce by rule 25
+
+
+state 376:
+
+	ty' : ty' . tycon 
+	tuple_ty : ty' . ASTERISK tuple_ty 
+	tuple_ty : ty' . ASTERISK ty' 
+	tuple_ty : ty' ASTERISK ty' .  (reduce by rule 26)
+
+	ID	shift 168
+	ASTERISK	shift 263
+
+	tycon	goto 262
+
+	.	reduce by rule 26
+
+
+state 377:
+
+	ffiFunty : fficconv ffiFunArg . ARROW ffity 
+
+	ARROW	shift 467
+
+
+	.	error
+
+
+state 378:
+
+	ffiFunArg : ffiTupleTy .  (reduce by rule 57)
+
+
+
+	.	reduce by rule 57
+
+
+state 379:
+
+	ffiArgs : ffiAtty .  (reduce by rule 43)
+	ffitupleseq : ffiAtty . ASTERISK ffiAtty 
+	ffitupleseq : ffiAtty . ASTERISK ffitupleseq 
+
+	ASTERISK	shift 381
+
+
+	.	reduce by rule 43
+
+
+state 380:
+
+	ffiFunty : ffiFunArg ARROW . ffity 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 468
+
+	.	reduce by rule 45
+
+
+state 381:
+
+	ffitupleseq : ffiAtty ASTERISK . ffiAtty 
+	ffitupleseq : ffiAtty ASTERISK . ffitupleseq 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 472
+
+	ffiArgs	goto 471
+	ffiContyArg	goto 271
+	ffiAtty	goto 470
+	ffitupleseq	goto 469
+
+	.	reduce by rule 45
+
+
+state 382:
+
+	ffiAtty : ffiContyArg tycon .  (reduce by rule 49)
+
+
+
+	.	reduce by rule 49
+
+
+state 383:
+
+	ffityseq : ffity . COMMA ffity 
+	ffityseq : ffity . COMMA ffityseq 
+	ffiAtty : LPAREN ffity . RPAREN 
+
+	COMMA	shift 474
+	RPAREN	shift 473
+
+
+	.	error
+
+
+state 384:
+
+	ffiArgs : LPAREN ffityseq . RPAREN 
+
+	RPAREN	shift 475
+
+
+	.	error
+
+
+state 385:
+
+	ffiFunArg : LPAREN RPAREN .  (reduce by rule 55)
+
+
+
+	.	reduce by rule 55
+
+
+state 386:
+
+	ffiAtty : LBRACE ffityrow . RBRACE 
+
+	RBRACE	shift 476
+
+
+	.	error
+
+
+state 387:
+
+	ffiAtty : LBRACE RBRACE .  (reduce by rule 51)
+
+
+
+	.	reduce by rule 51
+
+
+state 388:
+
+	ffityrow : ID . COLON ffity 
+	ffityrow : ID . COLON ffity COMMA ffityrow 
+
+	COLON	shift 477
+
+
+	.	error
+
+
+state 389:
+
+	ty' : LPAREN ty0_pc RPAREN . tycon 
+
+	ID	shift 168
+
+	tycon	goto 478
+
+	.	error
+
+
+state 390:
+
+	ty' : LPAREN ty RPAREN .  (reduce by rule 22)
+
+
+
+	.	reduce by rule 22
+
+
+state 391:
+
+	ty0_pc : ty COMMA . ty 
+	ty0_pc : ty COMMA . ty0_pc 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 480
+	ty0_pc	goto 479
+
+	.	error
+
+
+state 392:
+
+	ty' : LBRACE tlabels RBRACE .  (reduce by rule 19)
+
+
+
+	.	reduce by rule 19
+
+
+state 393:
+
+	tlabels : tlabel COMMA . tlabels 
+
+	ID	shift 87
+	INT	shift 86
+	ASTERISK	shift 85
+
+	id	goto 83
+	selector	goto 280
+	tlabel	goto 279
+	tlabels	goto 481
+
+	.	error
+
+
+state 394:
+
+	tlabel : selector COLON . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 482
+
+	.	error
+
+
+state 395:
+
+	tycon : ID DOT tycon .  (reduce by rule 13)
+
+
+
+	.	reduce by rule 13
+
+
+state 396:
+
+	ffiApplyArgs : ffiApplyArgSeq .  (reduce by rule 38)
+
+
+
+	.	reduce by rule 38
+
+
+state 397:
+
+	exp : FFIAPPLY cconv aexp LPAREN ffiApplyArgs . RPAREN COLON ffity 
+
+	RPAREN	shift 483
+
+
+	.	error
+
+
+state 398:
+
+	ffiApplyArgSeq : ffiApplyArg .  (reduce by rule 35)
+	ffiApplyArgSeq : ffiApplyArg . COMMA ffiApplyArgSeq 
+
+	COMMA	shift 484
+
+
+	.	reduce by rule 35
+
+
+state 399:
+
+	ffiApplyArg : app_exp . COLON ffity 
+
+	COLON	shift 485
+
+
+	.	error
+
+
+state 400:
+
+	ffiApplyArg : SIZEOF . LPAREN ty RPAREN 
+	ffiApplyArg : SIZEOF . LPAREN ty RPAREN ASTERISK aexp 
+
+	LPAREN	shift 486
+
+
+	.	error
+
+
+state 401:
+
+	sign : sign . WHERE whspec 
+	fsigb : ident fparamList EQUALOP sign .  (reduce by rule 273)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 273
+
+
+state 402:
+
+	fparamList : LPAREN fparam RPAREN .  (reduce by rule 308)
+	fparamList : LPAREN fparam RPAREN . fparamList 
+
+	LPAREN	shift 178
+
+	fparamList	goto 487
+
+	.	reduce by rule 308
+
+
+state 403:
+
+	spec_s : spec spec_s .  (reduce by rule 225)
+
+
+
+	.	reduce by rule 225
+
+
+state 404:
+
+	spec : VAL valspec .  (reduce by rule 233)
+	valspec : valspec . AND valspec 
+
+	AND	shift 488
+
+
+	.	reduce by rule 233
+
+
+state 405:
+
+	valspec : op_op . ident COLON ty 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 489
+
+	.	error
+
+
+state 406:
+
+	spec : TYPE tyspec .  (reduce by rule 231)
+	tyspec : tyspec . AND tyspec 
+
+	AND	shift 490
+
+
+	.	reduce by rule 231
+
+
+state 407:
+
+	tyspec : tyvars . ID 
+	tyspec : tyvars . ID EQUALOP ty 
+
+	ID	shift 491
+
+
+	.	error
+
+
+state 408:
+
+	spec : STRUCTURE strspec .  (reduce by rule 227)
+	strspec : strspec . AND strspec 
+
+	AND	shift 492
+
+
+	.	reduce by rule 227
+
+
+state 409:
+
+	strspec : ident . COLON sign 
+	strspec : ident . COLON sign EQUALOP qid 
+
+	COLON	shift 493
+
+
+	.	error
+
+
+state 410:
+
+	sharespec : patheqn .  (reduce by rule 255)
+
+
+
+	.	reduce by rule 255
+
+
+state 411:
+
+	spec : SHARING sharespec .  (reduce by rule 235)
+	sharespec : sharespec . AND sharespec 
+
+	AND	shift 494
+
+
+	.	reduce by rule 235
+
+
+state 412:
+
+	patheqn : qid . EQUALOP qid 
+	patheqn : qid . EQUALOP patheqn 
+
+	EQUALOP	shift 495
+
+
+	.	error
+
+
+state 413:
+
+	sharespec : TYPE . patheqn 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 412
+	patheqn	goto 496
+
+	.	error
+
+
+state 414:
+
+	spec : INCLUDE sign .  (reduce by rule 236)
+	sign : sign . WHERE whspec 
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 236
+
+
+state 415:
+
+	spec : INCLUDE ident . idents 
+	sign : ident .  (reduce by rule 261)
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 498
+	idents	goto 497
+
+	.	reduce by rule 261
+
+
+state 416:
+
+	spec : FUNCTOR fctspec .  (reduce by rule 228)
+	fctspec : fctspec . AND fctspec 
+
+	AND	shift 499
+
+
+	.	reduce by rule 228
+
+
+state 417:
+
+	fctspec : ident . fsig 
+
+	COLON	shift 502
+	LPAREN	shift 178
+
+	fsig	goto 501
+	fparamList	goto 500
+
+	.	error
+
+
+state 418:
+
+	spec : EXCEPTION exnspec .  (reduce by rule 234)
+	exnspec : exnspec . AND exnspec 
+
+	AND	shift 503
+
+
+	.	reduce by rule 234
+
+
+state 419:
+
+	exnspec : ident .  (reduce by rule 251)
+	exnspec : ident . OF ty 
+
+	OF	shift 504
+
+
+	.	reduce by rule 251
+
+
+state 420:
+
+	spec : EQTYPE tyspec .  (reduce by rule 232)
+	tyspec : tyspec . AND tyspec 
+
+	AND	shift 490
+
+
+	.	reduce by rule 232
+
+
+state 421:
+
+	db : db . AND db 
+	spec : DATATYPE db .  (reduce by rule 229)
+	spec : DATATYPE db . WITHTYPE tb 
+
+	AND	shift 254
+	WITHTYPE	shift 505
+
+
+	.	reduce by rule 229
+
+
+state 422:
+
+	fparam : ID COLON . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 506
+
+	.	error
+
+
+state 423:
+
+	spec_s : SEMICOLON spec_s .  (reduce by rule 226)
+
+
+
+	.	reduce by rule 226
+
+
+state 424:
+
+	pat_list : pat COMMA pat_list .  (reduce by rule 150)
+
+
+
+	.	reduce by rule 150
+
+
+state 425:
+
+	apat : LPAREN pat COMMA pat_list . RPAREN 
+
+	RPAREN	shift 507
+
+
+	.	error
+
+
+state 426:
+
+	apat : LPAREN pat BAR or_pat_list . RPAREN 
+
+	RPAREN	shift 508
+
+
+	.	error
+
+
+state 427:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	or_pat_list : pat .  (reduce by rule 151)
+	or_pat_list : pat . BAR or_pat_list 
+
+	AS	shift 193
+	BAR	shift 509
+	COLON	shift 191
+
+
+	.	reduce by rule 151
+
+
+state 428:
+
+	tyvar_pc : TYVAR COMMA tyvar_pc .  (reduce by rule 180)
+
+
+
+	.	reduce by rule 180
+
+
+state 429:
+
+	plabels : plabel COMMA plabels .  (reduce by rule 146)
+
+
+
+	.	reduce by rule 146
+
+
+state 430:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	plabel : selector EQUALOP pat .  (reduce by rule 141)
+
+	AS	shift 193
+	COLON	shift 191
+
+
+	.	reduce by rule 141
+
+
+state 431:
+
+	ty : ty . ARROW ty 
+	plabel : ID COLON ty .  (reduce by rule 144)
+	plabel : ID COLON ty . AS pat 
+
+	ARROW	shift 261
+	AS	shift 510
+
+
+	.	reduce by rule 144
+
+
+state 432:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	plabel : ID AS pat .  (reduce by rule 143)
+
+	AS	shift 193
+	COLON	shift 191
+
+
+	.	reduce by rule 143
+
+
+state 433:
+
+	rvb : rvb . AND rvb 
+	rvb : rvb AND rvb .  (reduce by rule 160)
+
+	AND	shift 328
+
+
+	.	reduce by rule 160
+
+
+state 434:
+
+	rvb : id constraint EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 511
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 435:
+
+	rvb : OP id constraint . EQUALOP exp 
+
+	EQUALOP	shift 512
+
+
+	.	error
+
+
+state 436:
+
+	rvb : LAZY id constraint . EQUALOP exp 
+
+	EQUALOP	shift 513
+
+
+	.	error
+
+
+state 437:
+
+	rvb : LAZY OP id . constraint EQUALOP exp 
+
+	COLON	shift 246
+
+	constraint	goto 514
+
+	.	reduce by rule 156
+
+
+state 438:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	vb : LAZY pat EQUALOP exp .  (reduce by rule 154)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 154
+
+
+state 439:
+
+	ty : ty . ARROW ty 
+	tb : tyvars ID EQUALOP ty .  (reduce by rule 172)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 172
+
+
+state 440:
+
+	str : str . COLON sign 
+	str : str . COLONGT sign 
+	strb : ident sigconstraint_op EQUALOP str .  (reduce by rule 304)
+
+	COLON	shift 516
+	COLONGT	shift 515
+
+
+	.	reduce by rule 304
+
+
+state 441:
+
+	str : qid .  (reduce by rule 276)
+	str : qid . arg_fct 
+
+	LPAREN	shift 518
+
+	arg_fct	goto 517
+
+	.	reduce by rule 276
+
+
+state 442:
+
+	str : STRUCT . strdecs END 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 519
+
+	.	reduce by rule 288
+
+
+state 443:
+
+	str : LET . strdecs IN str END 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 526
+
+	.	reduce by rule 288
+
+
+state 444:
+
+	sign : sign WHERE . whspec 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	TYPE	shift 529
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 528
+	whspec	goto 527
+
+	.	error
+
+
+state 445:
+
+	sign : SIG spec_s . END 
+
+	END	shift 530
+
+
+	.	error
+
+
+state 446:
+
+	ldec : OVERLOAD ident COLON ty AS . exp_pa 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 532
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+	exp_pa	goto 531
+
+	.	error
+
+
+state 447:
+
+	sdec : LOCAL sdecs IN sdecs END .  (reduce by rule 302)
+
+
+
+	.	reduce by rule 302
+
+
+state 448:
+
+	aexp : LET ldecs IN exp_ps END .  (reduce by rule 108)
+
+
+
+	.	reduce by rule 108
+
+
+state 449:
+
+	ldecs : LOCAL ldecs IN ldecs . END ldecs 
+
+	END	shift 533
+
+
+	.	error
+
+
+state 450:
+
+	exp : IF exp THEN exp ELSE . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 534
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 451:
+
+	fctb : ident fparamList sigconstraint_op EQUALOP . str 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	LET	shift 443
+	STRUCT	shift 442
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 441
+	str	goto 535
+
+	.	error
+
+
+state 452:
+
+	fctb : ident fsigconstraint_op EQUALOP fct_exp .  (reduce by rule 311)
+
+
+
+	.	reduce by rule 311
+
+
+state 453:
+
+	fct_exp : qid .  (reduce by rule 313)
+	fct_exp : qid . arg_fct 
+
+	LPAREN	shift 518
+
+	arg_fct	goto 536
+
+	.	reduce by rule 313
+
+
+state 454:
+
+	fct_exp : LET . strdecs IN fct_exp END 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 537
+
+	.	reduce by rule 288
+
+
+state 455:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	clause : apats constraint EQUALOP exp .  (reduce by rule 171)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 171
+
+
+state 456:
+
+	fb : LAZY fb' AND fb .  (reduce by rule 168)
+
+
+
+	.	reduce by rule 168
+
+
+state 457:
+
+	ty : ty . ARROW ty 
+	eb : op_op ident OF ty .  (reduce by rule 191)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 191
+
+
+state 458:
+
+	eb : op_op ident EQUALOP qid .  (reduce by rule 192)
+
+
+
+	.	reduce by rule 192
+
+
+state 459:
+
+	constrs : constr .  (reduce by rule 186)
+	constrs : constr . BAR constrs 
+
+	BAR	shift 538
+
+
+	.	reduce by rule 186
+
+
+state 460:
+
+	dbrhs : constrs .  (reduce by rule 184)
+
+
+
+	.	reduce by rule 184
+
+
+state 461:
+
+	db : tyvars ident EQUALOP dbrhs .  (reduce by rule 182)
+
+
+
+	.	reduce by rule 182
+
+
+state 462:
+
+	constr : op_op . ident 
+	constr : op_op . ident OF ty 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 539
+
+	.	error
+
+
+state 463:
+
+	dbrhs : DATATYPE . tycon 
+
+	ID	shift 168
+
+	tycon	goto 540
+
+	.	error
+
+
+state 464:
+
+	db : LAZY tyvars ident EQUALOP . dbrhs 
+
+	DATATYPE	shift 463
+	OP	shift 150
+
+	op_op	goto 462
+	dbrhs	goto 541
+	constrs	goto 460
+	constr	goto 459
+
+	.	reduce by rule 8
+
+
+state 465:
+
+	ldec : ABSTYPE db WITHTYPE tb WITH . ldecs END 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 542
+
+	.	reduce by rule 218
+
+
+state 466:
+
+	ldec : ABSTYPE db WITH ldecs END .  (reduce by rule 210)
+
+
+
+	.	reduce by rule 210
+
+
+state 467:
+
+	ffiFunty : fficconv ffiFunArg ARROW . ffity 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 543
+
+	.	reduce by rule 45
+
+
+state 468:
+
+	ffiFunty : ffiFunArg ARROW ffity .  (reduce by rule 58)
+
+
+
+	.	reduce by rule 58
+
+
+state 469:
+
+	ffitupleseq : ffiAtty ASTERISK ffitupleseq .  (reduce by rule 53)
+
+
+
+	.	reduce by rule 53
+
+
+state 470:
+
+	ffiArgs : ffiAtty .  (reduce by rule 43)
+	ffitupleseq : ffiAtty . ASTERISK ffiAtty 
+	ffitupleseq : ffiAtty ASTERISK ffiAtty .  (reduce by rule 52)
+	ffitupleseq : ffiAtty . ASTERISK ffitupleseq 
+
+	EOF	reduce by rule 52
+	SEMICOLON	reduce by rule 52
+	ID	reduce by rule 43
+	ABSTYPE	reduce by rule 52
+	AND	reduce by rule 52
+	ARROW	reduce by rule 52
+	BAR	reduce by rule 52
+	DATATYPE	reduce by rule 52
+	ELSE	reduce by rule 52
+	END	reduce by rule 52
+	EXCEPTION	reduce by rule 52
+	DO	reduce by rule 52
+	FUN	reduce by rule 52
+	FUNCTOR	reduce by rule 52
+	HANDLE	reduce by rule 52
+	IN	reduce by rule 52
+	INFIX	reduce by rule 52
+	INFIXR	reduce by rule 52
+	LOCAL	reduce by rule 52
+	NONFIX	reduce by rule 52
+	OF	reduce by rule 52
+	OPEN	reduce by rule 52
+	OVERLOAD	reduce by rule 52
+	SIGNATURE	reduce by rule 52
+	STRUCTURE	reduce by rule 52
+	THEN	reduce by rule 52
+	TYPE	reduce by rule 52
+	VAL	reduce by rule 52
+	ASTERISK	shift 381
+	COLON	reduce by rule 52
+	COMMA	reduce by rule 52
+	RBRACE	reduce by rule 52
+	RBRACKET	reduce by rule 52
+	RPAREN	reduce by rule 52
+	ORELSE	reduce by rule 52
+	ANDALSO	reduce by rule 52
+	FUNSIG	reduce by rule 52
+
+
+	.	error
+
+
+state 471:
+
+	ffiContyArg : ffiArgs .  (reduce by rule 46)
+
+
+
+	.	reduce by rule 46
+
+
+state 472:
+
+	ffiArgs : LPAREN . ffityseq RPAREN 
+	ffiAtty : LPAREN . ffity RPAREN 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffityseq	goto 384
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 383
+
+	.	reduce by rule 45
+
+
+state 473:
+
+	ffiAtty : LPAREN ffity RPAREN .  (reduce by rule 47)
+
+
+
+	.	reduce by rule 47
+
+
+state 474:
+
+	ffityseq : ffity COMMA . ffity 
+	ffityseq : ffity COMMA . ffityseq 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffityseq	goto 545
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 544
+
+	.	reduce by rule 45
+
+
+state 475:
+
+	ffiArgs : LPAREN ffityseq RPAREN .  (reduce by rule 44)
+
+
+
+	.	reduce by rule 44
+
+
+state 476:
+
+	ffiAtty : LBRACE ffityrow RBRACE .  (reduce by rule 50)
+
+
+
+	.	reduce by rule 50
+
+
+state 477:
+
+	ffityrow : ID COLON . ffity 
+	ffityrow : ID COLON . ffity COMMA ffityrow 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 546
+
+	.	reduce by rule 45
+
+
+state 478:
+
+	ty' : LPAREN ty0_pc RPAREN tycon .  (reduce by rule 21)
+
+
+
+	.	reduce by rule 21
+
+
+state 479:
+
+	ty0_pc : ty COMMA ty0_pc .  (reduce by rule 31)
+
+
+
+	.	reduce by rule 31
+
+
+state 480:
+
+	ty : ty . ARROW ty 
+	ty0_pc : ty . COMMA ty 
+	ty0_pc : ty COMMA ty .  (reduce by rule 30)
+	ty0_pc : ty . COMMA ty0_pc 
+
+	ARROW	shift 261
+	COMMA	shift 391
+
+
+	.	reduce by rule 30
+
+
+state 481:
+
+	tlabels : tlabel COMMA tlabels .  (reduce by rule 16)
+
+
+
+	.	reduce by rule 16
+
+
+state 482:
+
+	tlabel : selector COLON ty .  (reduce by rule 15)
+	ty : ty . ARROW ty 
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 15
+
+
+state 483:
+
+	exp : FFIAPPLY cconv aexp LPAREN ffiApplyArgs RPAREN . COLON ffity 
+
+	COLON	shift 547
+
+
+	.	error
+
+
+state 484:
+
+	ffiApplyArgSeq : ffiApplyArg COMMA . ffiApplyArgSeq 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	EQUALOP	shift 41
+	HASH	shift 36
+	LET	shift 32
+	OP	shift 29
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	SIZEOF	shift 400
+
+	ident	goto 10
+	int	goto 9
+	app_exp	goto 399
+	aexp	goto 6
+	quote	goto 5
+	ffiApplyArg	goto 398
+	ffiApplyArgSeq	goto 548
+
+	.	error
+
+
+state 485:
+
+	ffiApplyArg : app_exp COLON . ffity 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 549
+
+	.	reduce by rule 45
+
+
+state 486:
+
+	ffiApplyArg : SIZEOF LPAREN . ty RPAREN 
+	ffiApplyArg : SIZEOF LPAREN . ty RPAREN ASTERISK aexp 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 550
+
+	.	error
+
+
+state 487:
+
+	fparamList : LPAREN fparam RPAREN fparamList .  (reduce by rule 309)
+
+
+
+	.	reduce by rule 309
+
+
+state 488:
+
+	valspec : valspec AND . valspec 
+
+	OP	shift 150
+
+	op_op	goto 405
+	valspec	goto 551
+
+	.	reduce by rule 8
+
+
+state 489:
+
+	valspec : op_op ident . COLON ty 
+
+	COLON	shift 552
+
+
+	.	error
+
+
+state 490:
+
+	tyspec : tyspec AND . tyspec 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tyvars	goto 407
+	tyspec	goto 553
+
+	.	reduce by rule 176
+
+
+state 491:
+
+	tyspec : tyvars ID .  (reduce by rule 246)
+	tyspec : tyvars ID . EQUALOP ty 
+
+	EQUALOP	shift 554
+
+
+	.	reduce by rule 246
+
+
+state 492:
+
+	strspec : strspec AND . strspec 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 409
+	strspec	goto 555
+
+	.	error
+
+
+state 493:
+
+	strspec : ident COLON . sign 
+	strspec : ident COLON . sign EQUALOP qid 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 556
+
+	.	error
+
+
+state 494:
+
+	sharespec : sharespec AND . sharespec 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	TYPE	shift 413
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 412
+	sharespec	goto 557
+	patheqn	goto 410
+
+	.	error
+
+
+state 495:
+
+	patheqn : qid EQUALOP . qid 
+	patheqn : qid EQUALOP . patheqn 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 559
+	patheqn	goto 558
+
+	.	error
+
+
+state 496:
+
+	sharespec : TYPE patheqn .  (reduce by rule 254)
+
+
+
+	.	reduce by rule 254
+
+
+state 497:
+
+	spec : INCLUDE ident idents .  (reduce by rule 237)
+
+
+
+	.	reduce by rule 237
+
+
+state 498:
+
+	idents : ident .  (reduce by rule 238)
+	idents : ident . idents 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 498
+	idents	goto 560
+
+	.	reduce by rule 238
+
+
+state 499:
+
+	fctspec : fctspec AND . fctspec 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 417
+	fctspec	goto 561
+
+	.	error
+
+
+state 500:
+
+	fsig : fparamList . COLON sign 
+
+	COLON	shift 562
+
+
+	.	error
+
+
+state 501:
+
+	fctspec : ident fsig .  (reduce by rule 244)
+
+
+
+	.	reduce by rule 244
+
+
+state 502:
+
+	fsig : COLON . ident 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 563
+
+	.	error
+
+
+state 503:
+
+	exnspec : exnspec AND . exnspec 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 419
+	exnspec	goto 564
+
+	.	error
+
+
+state 504:
+
+	exnspec : ident OF . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 565
+
+	.	error
+
+
+state 505:
+
+	spec : DATATYPE db WITHTYPE . tb 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tb	goto 566
+	tyvars	goto 110
+
+	.	reduce by rule 176
+
+
+state 506:
+
+	sign : sign . WHERE whspec 
+	fparam : ID COLON sign .  (reduce by rule 306)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 306
+
+
+state 507:
+
+	apat : LPAREN pat COMMA pat_list RPAREN .  (reduce by rule 126)
+
+
+
+	.	reduce by rule 126
+
+
+state 508:
+
+	apat : LPAREN pat BAR or_pat_list RPAREN .  (reduce by rule 127)
+
+
+
+	.	reduce by rule 127
+
+
+state 509:
+
+	or_pat_list : pat BAR . or_pat_list 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 427
+	apat	goto 93
+	apat'	goto 92
+	or_pat_list	goto 567
+	apats	goto 90
+
+	.	error
+
+
+state 510:
+
+	plabel : ID COLON ty AS . pat 
+
+	ID	shift 109
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 107
+	STRING	shift 106
+	CHAR	shift 105
+	OP	shift 103
+	WILD	shift 101
+	ASTERISK	shift 85
+	LBRACE	shift 100
+	LBRACKET	shift 99
+	LPAREN	shift 147
+	VECTORSTART	shift 97
+
+	id	goto 96
+	int	goto 95
+	pat	goto 568
+	apat	goto 93
+	apat'	goto 92
+	apats	goto 90
+
+	.	error
+
+
+state 511:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	rvb : id constraint EQUALOP exp .  (reduce by rule 158)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 158
+
+
+state 512:
+
+	rvb : OP id constraint EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 569
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 513:
+
+	rvb : LAZY id constraint EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 570
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 514:
+
+	rvb : LAZY OP id constraint . EQUALOP exp 
+
+	EQUALOP	shift 571
+
+
+	.	error
+
+
+state 515:
+
+	str : str COLONGT . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 572
+
+	.	error
+
+
+state 516:
+
+	str : str COLON . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 573
+
+	.	error
+
+
+state 517:
+
+	str : qid arg_fct .  (reduce by rule 278)
+
+
+
+	.	reduce by rule 278
+
+
+state 518:
+
+	arg_fct : LPAREN . strdecs RPAREN arg_fct 
+	arg_fct : LPAREN . str RPAREN arg_fct 
+	arg_fct : LPAREN . str RPAREN 
+	arg_fct : LPAREN . strdecs RPAREN 
+
+	SEMICOLON	shift 525
+	ID	shift 123
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EQUALOP	shift 41
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LET	shift 443
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCT	shift 442
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 441
+	fixity	goto 4
+	ldec	goto 521
+	str	goto 575
+	strdec	goto 520
+	strdecs	goto 574
+
+	.	reduce by rule 288
+
+
+state 519:
+
+	str : STRUCT strdecs . END 
+
+	END	shift 576
+
+
+	.	error
+
+
+state 520:
+
+	strdecs : strdec . strdecs 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 577
+
+	.	reduce by rule 288
+
+
+state 521:
+
+	strdec : ldec .  (reduce by rule 297)
+
+
+
+	.	reduce by rule 297
+
+
+state 522:
+
+	strdec : STRUCTURE . strb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 115
+	strb	goto 578
+
+	.	error
+
+
+state 523:
+
+	strdec : LOCAL . strdecs IN strdecs END 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 579
+
+	.	reduce by rule 288
+
+
+state 524:
+
+	strdec : FUNCTOR . fctb 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 137
+	fctb	goto 580
+
+	.	error
+
+
+state 525:
+
+	strdecs : SEMICOLON . strdecs 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 581
+
+	.	reduce by rule 288
+
+
+state 526:
+
+	str : LET strdecs . IN str END 
+
+	IN	shift 582
+
+
+	.	error
+
+error:  state 527: shift/reduce conflict (shift AND, reduce by rule 263)
+
+state 527:
+
+	whspec : whspec . AND whspec 
+	sign : sign WHERE whspec .  (reduce by rule 263)
+
+	AND	shift 583
+
+
+	.	reduce by rule 263
+
+
+state 528:
+
+	whspec : qid . EQUALOP qid 
+
+	EQUALOP	shift 584
+
+
+	.	error
+
+
+state 529:
+
+	whspec : TYPE . tyvars qid EQUALOP ty 
+
+	TYVAR	shift 113
+	LPAREN	shift 112
+
+	tyvars	goto 585
+
+	.	reduce by rule 176
+
+
+state 530:
+
+	sign : SIG spec_s END .  (reduce by rule 262)
+
+
+
+	.	reduce by rule 262
+
+
+state 531:
+
+	ldec : OVERLOAD ident COLON ty AS exp_pa .  (reduce by rule 215)
+
+
+
+	.	reduce by rule 215
+
+
+state 532:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	exp_pa : exp .  (reduce by rule 216)
+	exp_pa : exp . AND exp_pa 
+
+	AND	shift 586
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 216
+
+
+state 533:
+
+	ldecs : LOCAL ldecs IN ldecs END . ldecs 
+
+	SEMICOLON	shift 131
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 130
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 129
+	ldecs	goto 587
+
+	.	reduce by rule 218
+
+
+state 534:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : IF exp THEN exp ELSE exp .  (reduce by rule 81)
+	exp : exp . COLON IMPORT ffity 
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 81
+
+
+state 535:
+
+	str : str . COLON sign 
+	str : str . COLONGT sign 
+	fctb : ident fparamList sigconstraint_op EQUALOP str .  (reduce by rule 310)
+
+	COLON	shift 516
+	COLONGT	shift 515
+
+
+	.	reduce by rule 310
+
+
+state 536:
+
+	fct_exp : qid arg_fct .  (reduce by rule 314)
+
+
+
+	.	reduce by rule 314
+
+
+state 537:
+
+	fct_exp : LET strdecs . IN fct_exp END 
+
+	IN	shift 588
+
+
+	.	error
+
+
+state 538:
+
+	constrs : constr BAR . constrs 
+
+	OP	shift 150
+
+	op_op	goto 462
+	constrs	goto 589
+	constr	goto 459
+
+	.	reduce by rule 8
+
+
+state 539:
+
+	constr : op_op ident .  (reduce by rule 188)
+	constr : op_op ident . OF ty 
+
+	OF	shift 590
+
+
+	.	reduce by rule 188
+
+
+state 540:
+
+	dbrhs : DATATYPE tycon .  (reduce by rule 185)
+
+
+
+	.	reduce by rule 185
+
+
+state 541:
+
+	db : LAZY tyvars ident EQUALOP dbrhs .  (reduce by rule 183)
+
+
+
+	.	reduce by rule 183
+
+
+state 542:
+
+	ldec : ABSTYPE db WITHTYPE tb WITH ldecs . END 
+
+	END	shift 591
+
+
+	.	error
+
+
+state 543:
+
+	ffiFunty : fficconv ffiFunArg ARROW ffity .  (reduce by rule 59)
+
+
+
+	.	reduce by rule 59
+
+
+state 544:
+
+	ffityseq : ffity . COMMA ffity 
+	ffityseq : ffity COMMA ffity .  (reduce by rule 41)
+	ffityseq : ffity . COMMA ffityseq 
+
+	COMMA	shift 474
+
+
+	.	reduce by rule 41
+
+
+state 545:
+
+	ffityseq : ffity COMMA ffityseq .  (reduce by rule 42)
+
+
+
+	.	reduce by rule 42
+
+
+state 546:
+
+	ffityrow : ID COLON ffity .  (reduce by rule 39)
+	ffityrow : ID COLON ffity . COMMA ffityrow 
+
+	COMMA	shift 592
+
+
+	.	reduce by rule 39
+
+
+state 547:
+
+	exp : FFIAPPLY cconv aexp LPAREN ffiApplyArgs RPAREN COLON . ffity 
+
+	TYVAR	shift 275
+	LBRACE	shift 274
+	LPAREN	shift 273
+	CDECL	shift 64
+	STDCALL	shift 63
+
+	ffiArgs	goto 272
+	ffiContyArg	goto 271
+	ffiAtty	goto 270
+	ffitupleseq	goto 269
+	ffiTupleTy	goto 268
+	ffiFunArg	goto 267
+	ffiFunty	goto 266
+	fficconv	goto 265
+	ffity	goto 593
+
+	.	reduce by rule 45
+
+
+state 548:
+
+	ffiApplyArgSeq : ffiApplyArg COMMA ffiApplyArgSeq .  (reduce by rule 36)
+
+
+
+	.	reduce by rule 36
+
+
+state 549:
+
+	ffiApplyArg : app_exp COLON ffity .  (reduce by rule 32)
+
+
+
+	.	reduce by rule 32
+
+
+state 550:
+
+	ty : ty . ARROW ty 
+	ffiApplyArg : SIZEOF LPAREN ty . RPAREN 
+	ffiApplyArg : SIZEOF LPAREN ty . RPAREN ASTERISK aexp 
+
+	ARROW	shift 261
+	RPAREN	shift 594
+
+
+	.	error
+
+
+state 551:
+
+	valspec : valspec . AND valspec 
+	valspec : valspec AND valspec .  (reduce by rule 248)
+
+	AND	shift 488
+
+
+	.	reduce by rule 248
+
+
+state 552:
+
+	valspec : op_op ident COLON . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 595
+
+	.	error
+
+
+state 553:
+
+	tyspec : tyspec . AND tyspec 
+	tyspec : tyspec AND tyspec .  (reduce by rule 245)
+
+	AND	shift 490
+
+
+	.	reduce by rule 245
+
+
+state 554:
+
+	tyspec : tyvars ID EQUALOP . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 596
+
+	.	error
+
+
+state 555:
+
+	strspec : strspec . AND strspec 
+	strspec : strspec AND strspec .  (reduce by rule 240)
+
+	AND	shift 492
+
+
+	.	reduce by rule 240
+
+
+state 556:
+
+	strspec : ident COLON sign .  (reduce by rule 241)
+	strspec : ident COLON sign . EQUALOP qid 
+	sign : sign . WHERE whspec 
+
+	EQUALOP	shift 597
+	WHERE	shift 444
+
+
+	.	reduce by rule 241
+
+
+state 557:
+
+	sharespec : sharespec . AND sharespec 
+	sharespec : sharespec AND sharespec .  (reduce by rule 253)
+
+	AND	shift 494
+
+
+	.	reduce by rule 253
+
+
+state 558:
+
+	patheqn : qid EQUALOP patheqn .  (reduce by rule 257)
+
+
+
+	.	reduce by rule 257
+
+
+state 559:
+
+	patheqn : qid . EQUALOP qid 
+	patheqn : qid EQUALOP qid .  (reduce by rule 256)
+	patheqn : qid . EQUALOP patheqn 
+
+	EQUALOP	shift 495
+
+
+	.	reduce by rule 256
+
+
+state 560:
+
+	idents : ident idents .  (reduce by rule 239)
+
+
+
+	.	reduce by rule 239
+
+
+state 561:
+
+	fctspec : fctspec . AND fctspec 
+	fctspec : fctspec AND fctspec .  (reduce by rule 243)
+
+	AND	shift 499
+
+
+	.	reduce by rule 243
+
+
+state 562:
+
+	fsig : fparamList COLON . sign 
+
+	ID	shift 55
+	EQUALOP	shift 41
+	SIG	shift 342
+	ASTERISK	shift 20
+
+	ident	goto 341
+	sign	goto 598
+
+	.	error
+
+
+state 563:
+
+	fsig : COLON ident .  (reduce by rule 274)
+
+
+
+	.	reduce by rule 274
+
+
+state 564:
+
+	exnspec : exnspec . AND exnspec 
+	exnspec : exnspec AND exnspec .  (reduce by rule 250)
+
+	AND	shift 503
+
+
+	.	reduce by rule 250
+
+
+state 565:
+
+	ty : ty . ARROW ty 
+	exnspec : ident OF ty .  (reduce by rule 252)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 252
+
+
+state 566:
+
+	tb : tb . AND tb 
+	spec : DATATYPE db WITHTYPE tb .  (reduce by rule 230)
+
+	AND	shift 219
+
+
+	.	reduce by rule 230
+
+
+state 567:
+
+	or_pat_list : pat BAR or_pat_list .  (reduce by rule 152)
+
+
+
+	.	reduce by rule 152
+
+
+state 568:
+
+	pat : pat . AS pat 
+	pat : pat . COLON ty 
+	plabel : ID COLON ty AS pat .  (reduce by rule 145)
+
+	AS	shift 193
+	COLON	shift 191
+
+
+	.	reduce by rule 145
+
+
+state 569:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	rvb : OP id constraint EQUALOP exp .  (reduce by rule 159)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 159
+
+
+state 570:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	rvb : LAZY id constraint EQUALOP exp .  (reduce by rule 161)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 161
+
+
+state 571:
+
+	rvb : LAZY OP id constraint EQUALOP . exp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 599
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+
+	.	error
+
+
+state 572:
+
+	sign : sign . WHERE whspec 
+	str : str COLONGT sign .  (reduce by rule 281)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 281
+
+
+state 573:
+
+	sign : sign . WHERE whspec 
+	str : str COLON sign .  (reduce by rule 280)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 280
+
+
+state 574:
+
+	arg_fct : LPAREN strdecs . RPAREN arg_fct 
+	arg_fct : LPAREN strdecs . RPAREN 
+
+	RPAREN	shift 600
+
+
+	.	error
+
+
+state 575:
+
+	str : str . COLON sign 
+	str : str . COLONGT sign 
+	arg_fct : LPAREN str . RPAREN arg_fct 
+	arg_fct : LPAREN str . RPAREN 
+
+	COLON	shift 516
+	COLONGT	shift 515
+	RPAREN	shift 601
+
+
+	.	error
+
+
+state 576:
+
+	str : STRUCT strdecs END .  (reduce by rule 277)
+
+
+
+	.	reduce by rule 277
+
+
+state 577:
+
+	strdecs : strdec strdecs .  (reduce by rule 286)
+
+
+
+	.	reduce by rule 286
+
+
+state 578:
+
+	strdec : STRUCTURE strb .  (reduce by rule 294)
+	strb : strb . AND strb 
+
+	AND	shift 221
+
+
+	.	reduce by rule 294
+
+
+state 579:
+
+	strdec : LOCAL strdecs . IN strdecs END 
+
+	IN	shift 602
+
+
+	.	error
+
+
+state 580:
+
+	strdec : FUNCTOR fctb .  (reduce by rule 295)
+	fctb : fctb . AND fctb 
+
+	AND	shift 238
+
+
+	.	reduce by rule 295
+
+
+state 581:
+
+	strdecs : SEMICOLON strdecs .  (reduce by rule 287)
+
+
+
+	.	reduce by rule 287
+
+
+state 582:
+
+	str : LET strdecs IN . str END 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	LET	shift 443
+	STRUCT	shift 442
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 441
+	str	goto 603
+
+	.	error
+
+
+state 583:
+
+	whspec : whspec AND . whspec 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	TYPE	shift 529
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 528
+	whspec	goto 604
+
+	.	error
+
+
+state 584:
+
+	whspec : qid EQUALOP . qid 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 605
+
+	.	error
+
+
+state 585:
+
+	whspec : TYPE tyvars . qid EQUALOP ty 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 606
+
+	.	error
+
+
+state 586:
+
+	exp_pa : exp AND . exp_pa 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	CASE	shift 43
+	EQUALOP	shift 41
+	FN	shift 39
+	HASH	shift 36
+	IF	shift 35
+	LET	shift 32
+	OP	shift 29
+	RAISE	shift 26
+	WHILE	shift 21
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+	CAST	shift 12
+	FFIAPPLY	shift 11
+
+	ident	goto 10
+	int	goto 9
+	exp	goto 532
+	app_exp	goto 7
+	aexp	goto 6
+	quote	goto 5
+	exp_pa	goto 607
+
+	.	error
+
+
+state 587:
+
+	ldecs : LOCAL ldecs IN ldecs END ldecs .  (reduce by rule 221)
+
+
+
+	.	reduce by rule 221
+
+
+state 588:
+
+	fct_exp : LET strdecs IN . fct_exp END 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	LET	shift 454
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 453
+	fct_exp	goto 608
+
+	.	error
+
+
+state 589:
+
+	constrs : constr BAR constrs .  (reduce by rule 187)
+
+
+
+	.	reduce by rule 187
+
+
+state 590:
+
+	constr : op_op ident OF . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 609
+
+	.	error
+
+
+state 591:
+
+	ldec : ABSTYPE db WITHTYPE tb WITH ldecs END .  (reduce by rule 211)
+
+
+
+	.	reduce by rule 211
+
+
+state 592:
+
+	ffityrow : ID COLON ffity COMMA . ffityrow 
+
+	ID	shift 388
+
+	ffityrow	goto 610
+
+	.	error
+
+
+state 593:
+
+	exp : FFIAPPLY cconv aexp LPAREN ffiApplyArgs RPAREN COLON ffity .  (reduce by rule 85)
+
+
+
+	.	reduce by rule 85
+
+
+state 594:
+
+	ffiApplyArg : SIZEOF LPAREN ty RPAREN .  (reduce by rule 33)
+	ffiApplyArg : SIZEOF LPAREN ty RPAREN . ASTERISK aexp 
+
+	ASTERISK	shift 611
+
+
+	.	reduce by rule 33
+
+
+state 595:
+
+	ty : ty . ARROW ty 
+	valspec : op_op ident COLON ty .  (reduce by rule 249)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 249
+
+
+state 596:
+
+	ty : ty . ARROW ty 
+	tyspec : tyvars ID EQUALOP ty .  (reduce by rule 247)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 247
+
+
+state 597:
+
+	strspec : ident COLON sign EQUALOP . qid 
+
+	ID	shift 123
+	EQUALOP	shift 41
+	ASTERISK	shift 20
+
+	ident	goto 122
+	qid	goto 612
+
+	.	error
+
+
+state 598:
+
+	sign : sign . WHERE whspec 
+	fsig : fparamList COLON sign .  (reduce by rule 275)
+
+	WHERE	shift 444
+
+
+	.	reduce by rule 275
+
+
+state 599:
+
+	exp : exp . HANDLE match 
+	exp : exp . ORELSE exp 
+	exp : exp . ANDALSO exp 
+	exp : exp . COLON ty 
+	exp : exp . COLON IMPORT ffity 
+	rvb : LAZY OP id constraint EQUALOP exp .  (reduce by rule 162)
+
+	HANDLE	shift 60
+	COLON	shift 59
+	ORELSE	shift 58
+	ANDALSO	shift 57
+
+
+	.	reduce by rule 162
+
+
+state 600:
+
+	arg_fct : LPAREN strdecs RPAREN . arg_fct 
+	arg_fct : LPAREN strdecs RPAREN .  (reduce by rule 285)
+
+	LPAREN	shift 518
+
+	arg_fct	goto 613
+
+	.	reduce by rule 285
+
+
+state 601:
+
+	arg_fct : LPAREN str RPAREN . arg_fct 
+	arg_fct : LPAREN str RPAREN .  (reduce by rule 284)
+
+	LPAREN	shift 518
+
+	arg_fct	goto 614
+
+	.	reduce by rule 284
+
+
+state 602:
+
+	strdec : LOCAL strdecs IN . strdecs END 
+
+	SEMICOLON	shift 525
+	ABSTYPE	shift 44
+	DATATYPE	shift 42
+	EXCEPTION	shift 40
+	FUN	shift 38
+	FUNCTOR	shift 524
+	INFIX	shift 34
+	INFIXR	shift 33
+	LOCAL	shift 523
+	NONFIX	shift 30
+	OPEN	shift 28
+	OVERLOAD	shift 27
+	STRUCTURE	shift 522
+	TYPE	shift 23
+	VAL	shift 22
+
+	fixity	goto 4
+	ldec	goto 521
+	strdec	goto 520
+	strdecs	goto 615
+
+	.	reduce by rule 288
+
+
+state 603:
+
+	str : LET strdecs IN str . END 
+	str : str . COLON sign 
+	str : str . COLONGT sign 
+
+	END	shift 616
+	COLON	shift 516
+	COLONGT	shift 515
+
+
+	.	error
+
+
+state 604:
+
+	whspec : whspec . AND whspec 
+	whspec : whspec AND whspec .  (reduce by rule 258)
+
+	AND	shift 583
+
+
+	.	reduce by rule 258
+
+
+state 605:
+
+	whspec : qid EQUALOP qid .  (reduce by rule 260)
+
+
+
+	.	reduce by rule 260
+
+
+state 606:
+
+	whspec : TYPE tyvars qid . EQUALOP ty 
+
+	EQUALOP	shift 617
+
+
+	.	error
+
+
+state 607:
+
+	exp_pa : exp AND exp_pa .  (reduce by rule 217)
+
+
+
+	.	reduce by rule 217
+
+
+state 608:
+
+	fct_exp : LET strdecs IN fct_exp . END 
+
+	END	shift 618
+
+
+	.	error
+
+
+state 609:
+
+	ty : ty . ARROW ty 
+	constr : op_op ident OF ty .  (reduce by rule 189)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 189
+
+
+state 610:
+
+	ffityrow : ID COLON ffity COMMA ffityrow .  (reduce by rule 40)
+
+
+
+	.	reduce by rule 40
+
+
+state 611:
+
+	ffiApplyArg : SIZEOF LPAREN ty RPAREN ASTERISK . aexp 
+
+	ID	shift 51
+	INT	shift 50
+	INT0	shift 49
+	WORD	shift 48
+	REAL	shift 47
+	STRING	shift 46
+	CHAR	shift 45
+	EQUALOP	shift 41
+	HASH	shift 36
+	LET	shift 32
+	OP	shift 29
+	ASTERISK	shift 20
+	LBRACE	shift 19
+	LBRACKET	shift 18
+	LPAREN	shift 17
+	VECTORSTART	shift 15
+	BEGINQ	shift 14
+	AQID	shift 13
+
+	ident	goto 10
+	int	goto 9
+	aexp	goto 619
+	quote	goto 5
+
+	.	error
+
+
+state 612:
+
+	strspec : ident COLON sign EQUALOP qid .  (reduce by rule 242)
+
+
+
+	.	reduce by rule 242
+
+
+state 613:
+
+	arg_fct : LPAREN strdecs RPAREN arg_fct .  (reduce by rule 282)
+
+
+
+	.	reduce by rule 282
+
+
+state 614:
+
+	arg_fct : LPAREN str RPAREN arg_fct .  (reduce by rule 283)
+
+
+
+	.	reduce by rule 283
+
+
+state 615:
+
+	strdec : LOCAL strdecs IN strdecs . END 
+
+	END	shift 620
+
+
+	.	error
+
+
+state 616:
+
+	str : LET strdecs IN str END .  (reduce by rule 279)
+
+
+
+	.	reduce by rule 279
+
+
+state 617:
+
+	whspec : TYPE tyvars qid EQUALOP . ty 
+
+	ID	shift 168
+	TYVAR	shift 167
+	LBRACE	shift 166
+	LPAREN	shift 165
+
+	tycon	goto 163
+	ty'	goto 162
+	tuple_ty	goto 161
+	ty	goto 621
+
+	.	error
+
+
+state 618:
+
+	fct_exp : LET strdecs IN fct_exp END .  (reduce by rule 315)
+
+
+
+	.	reduce by rule 315
+
+
+state 619:
+
+	ffiApplyArg : SIZEOF LPAREN ty RPAREN ASTERISK aexp .  (reduce by rule 34)
+
+
+
+	.	reduce by rule 34
+
+
+state 620:
+
+	strdec : LOCAL strdecs IN strdecs END .  (reduce by rule 296)
+
+
+
+	.	reduce by rule 296
+
+
+state 621:
+
+	ty : ty . ARROW ty 
+	whspec : TYPE tyvars qid EQUALOP ty .  (reduce by rule 259)
+
+	ARROW	shift 261
+
+
+	.	reduce by rule 259
+
+
+state 622:
+
+
+	EOF	accept
+	SEMICOLON	accept
+
+
+	.	error
+
+1042 of 3098 action table entries left after compaction
+908 goto table entries

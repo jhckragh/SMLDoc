@@ -1,0 +1,33 @@
+(*
+ * @author YAMATODANI Kiyoshi
+ * @copyright 2010, Tohoku University.
+ *)
+Group is
+(*
+  to build this example, see ../../README.txt
+*)
+(*
+#if defined(NEW_CM)
+        $/basis_compat.cm
+#endif
+*)
+$/basis.cm
+
+#if defined(NEW_CM)
+        $/ml-yacc-lib.cm
+#else
+        ml-yacc-lib.cm
+#endif
+
+        ../../smlformatlib.cm
+(*
+	Absyn.ppg:ppg
+*)
+	Absyn.ppg.sml
+(*
+	AbsynUseDefault.ppg:ppg
+*)
+
+	ml.lex
+	ml.grm
+	Main.sml

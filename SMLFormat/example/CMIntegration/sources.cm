@@ -1,0 +1,23 @@
+(*
+ * @author YAMATODANI Kiyoshi
+ * @copyright 2010, Tohoku University.
+ *)
+Group
+is
+(*
+#if defined(NEW_CM)
+        $/basis_compat.cm
+#endif
+*)
+$/basis.cm
+
+
+        ../../smlformatlib.cm
+
+#if (defined(structure PPGSourceTool))
+        Tree.ppg:ppg
+#else
+        Tree.ppg.sml
+#endif
+
+        Main.sml
